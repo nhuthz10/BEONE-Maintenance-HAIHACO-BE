@@ -1,0 +1,190 @@
+[
+  {
+    "ContainingType": "Maintenance.Controllers.AuthController",
+    "Method": "AppSignIn",
+    "RelativePath": "api/b1cs/v1/auth/appSignIn",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Maintenance.Dto.Auth.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.AuthController",
+    "Method": "LockUser",
+    "RelativePath": "api/b1cs/v1/auth/lockUser/{accoutnId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accoutnId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.AuthController",
+    "Method": "SignIn",
+    "RelativePath": "api/b1cs/v1/auth/signIn",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Maintenance.Dto.Auth.LoginAdminDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.AuthController",
+    "Method": "TokenExpire",
+    "RelativePath": "api/b1cs/v1/auth/tokenExpire",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.AuthController",
+    "Method": "UnLockUser",
+    "RelativePath": "api/b1cs/v1/auth/unLockUser/{accoutnId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accoutnId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.EquipmentController",
+    "Method": "GetAllEquipment",
+    "RelativePath": "api/b1cs/v1/equipment/getAllEquipment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.FactoryController",
+    "Method": "GetAllFactory",
+    "RelativePath": "api/b1cs/v1/factory/getAllFactory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "CreateMaintenance",
+    "RelativePath": "api/b1cs/v1/maintenance/createMaintenance",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "MtnType",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ItemCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DocDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "PlannedCompletionDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Dscription",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Attachments",
+        "Type": "System.Collections.Generic.List\u00601[[Maintenance.Dto.Maintenance.CreateMaintenenceAttachmentDto, Maintenance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "GetAllMaintenance",
+    "RelativePath": "api/b1cs/v1/maintenance/getAllMaintenance",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "GetAllMaintenanceTechnical",
+    "RelativePath": "api/b1cs/v1/maintenance/getAllMaintenanceTechnical",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "MtnType",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Factory",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "GetMaintenance",
+    "RelativePath": "api/b1cs/v1/maintenance/getMaintenance",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

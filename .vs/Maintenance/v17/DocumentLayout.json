@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AA9602CE-0AD9-4B6D-8D0F-5D18A3DB2F69}|Maintenance.Infrastructure.SqlServer\\Maintenance.Infrastructure.SqlServer.csproj|d:\\mobile\\app_maintenance_haihaco\\be\\maintenance.infrastructure.sqlserver\\repositories\\maintenance\\maintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA9602CE-0AD9-4B6D-8D0F-5D18A3DB2F69}|Maintenance.Infrastructure.SqlServer\\Maintenance.Infrastructure.SqlServer.csproj|solutionrelative:maintenance.infrastructure.sqlserver\\repositories\\maintenance\\maintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA9602CE-0AD9-4B6D-8D0F-5D18A3DB2F69}|Maintenance.Infrastructure.SqlServer\\Maintenance.Infrastructure.SqlServer.csproj|d:\\mobile\\app_maintenance_haihaco\\be\\maintenance.infrastructure.sqlserver\\repositories\\maintenance\\imaintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA9602CE-0AD9-4B6D-8D0F-5D18A3DB2F69}|Maintenance.Infrastructure.SqlServer\\Maintenance.Infrastructure.SqlServer.csproj|solutionrelative:maintenance.infrastructure.sqlserver\\repositories\\maintenance\\imaintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A662B207-9A97-4D3E-8D58-1E7A941124D5}|Maintenance\\Maintenance.csproj|d:\\mobile\\app_maintenance_haihaco\\be\\maintenance\\controllers\\factorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A662B207-9A97-4D3E-8D58-1E7A941124D5}|Maintenance\\Maintenance.csproj|solutionrelative:maintenance\\controllers\\factorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IMaintenanceRepository.cs",
+              "DocumentMoniker": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\IMaintenanceRepository.cs",
+              "RelativeDocumentMoniker": "Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\IMaintenanceRepository.cs",
+              "ToolTip": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\IMaintenanceRepository.cs",
+              "RelativeToolTip": "Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\IMaintenanceRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T08:44:09.669Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MaintenanceRepository.cs",
+              "DocumentMoniker": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\MaintenanceRepository.cs",
+              "RelativeDocumentMoniker": "Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\MaintenanceRepository.cs",
+              "ToolTip": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\MaintenanceRepository.cs",
+              "RelativeToolTip": "Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\MaintenanceRepository.cs",
+              "ViewState": "AgIAAJYBAAAAAAAAAAAuwLcBAABsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T04:19:31.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FactoryController.cs",
+              "DocumentMoniker": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\Controllers\\FactoryController.cs",
+              "RelativeDocumentMoniker": "Maintenance\\Controllers\\FactoryController.cs",
+              "ToolTip": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\Controllers\\FactoryController.cs",
+              "RelativeToolTip": "Maintenance\\Controllers\\FactoryController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T02:39:50.033Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
