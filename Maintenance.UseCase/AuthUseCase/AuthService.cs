@@ -82,5 +82,18 @@ namespace Maintenance.UseCase.AuthUseCase
                 throw;
             }
         }
+
+        public async Task<OperationResult<bool>> CreateUser(CreateUserModel model)
+        {
+            try
+            {
+                var result = await _authRepository.CreateUser(model);
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         public Maintenances Maintenance { get; set; }
 
 
+        public int? Type { get; set; }
         public string? FilePath { get; set; }
         public string? FileName { get; set; }
         public string? FileType { get; set; }

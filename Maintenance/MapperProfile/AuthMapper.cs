@@ -10,6 +10,7 @@ namespace Maintenance.MapperProfile
         {
             CreateMap<LoginDto, LoginModel>();
             CreateMap<LoginAdminDto, LoginAdminModel>();
+            CreateMap<CreateUserDto, CreateUserModel>();
         }
     }
 }

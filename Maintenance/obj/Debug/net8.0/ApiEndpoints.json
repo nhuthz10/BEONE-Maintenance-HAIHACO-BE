@@ -17,6 +17,22 @@
   },
   {
     "ContainingType": "Maintenance.Controllers.AuthController",
+    "Method": "CreateUser",
+    "RelativePath": "api/b1cs/v1/auth/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Maintenance.Dto.Auth.CreateUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.AuthController",
     "Method": "LockUser",
     "RelativePath": "api/b1cs/v1/auth/lockUser/{accoutnId}",
     "HttpMethod": "GET",
@@ -84,6 +100,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Maintenance.Controllers.EquipmentController",
+    "Method": "GetAllSparePart",
+    "RelativePath": "api/b1cs/v1/equipment/getAllSparePart",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Maintenance.Controllers.FactoryController",
     "Method": "GetAllFactory",
     "RelativePath": "api/b1cs/v1/factory/getAllFactory",
@@ -91,6 +117,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "CreateItemRequest",
+    "RelativePath": "api/b1cs/v1/maintenance/createItemRequest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Maintenance.Dto.Maintenance.CreateItemRequestDto",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -130,6 +172,38 @@
         "Name": "Attachments",
         "Type": "System.Collections.Generic.List\u00601[[Maintenance.Dto.Maintenance.CreateMaintenenceAttachmentDto, Maintenance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "CreatePurchaseRequest",
+    "RelativePath": "api/b1cs/v1/maintenance/createPurchaseRequest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Maintenance.Dto.Maintenance.CreatePurchaseRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "CreatePurchaseRequestService",
+    "RelativePath": "api/b1cs/v1/maintenance/createPurchaseRequestService",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Maintenance.Dto.Maintenance.CreatePurchaseRequestServiceDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -182,6 +256,53 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "SaveCheckList",
+    "RelativePath": "api/b1cs/v1/maintenance/saveCheckList",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Maintenance.Dto.Maintenance.SaveCheckListDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "UpdateStatusMaintenance",
+    "RelativePath": "api/b1cs/v1/maintenance/updateStatusMaintenance",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Status",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Remark",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Attachments",
+        "Type": "System.Collections.Generic.List\u00601[[Maintenance.Dto.Maintenance.CreateMaintenenceAttachmentDto, Maintenance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       }
     ],

@@ -79,7 +79,36 @@ namespace Maintenance.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserDto model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ResponseApi<string>.Error(ErrorCode.ValidationFailed, "Invalid data"));
+                }
+
+                var newModel = _mapper.Map<CreateUserModel>(model);
+
+                var result = await _authService.CreateUser(newModel);
+
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(ResponseApi<string>.Error(result.ErrorCode, result.Message));
+                }
+
+                return Ok(ResponseApi<string>.Success(message: result.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
+            }
+        }
+
+
+        [Authorize]
         [HttpGet("lockUser/{accoutnId}")]
         public async Task<IActionResult> LockUser([FromRoute] string accoutnId)
         {
@@ -106,7 +135,7 @@ namespace Maintenance.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpGet("unLockUser/{accoutnId}")]
         public async Task<IActionResult> UnLockUser([FromRoute] string accoutnId)
         {

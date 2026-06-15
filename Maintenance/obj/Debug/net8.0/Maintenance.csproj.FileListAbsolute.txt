@@ -392,3 +392,5 @@ D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Debug\net8.0\refint\Mainten
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Debug\net8.0\Maintenance.pdb
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Debug\net8.0\Maintenance.genruntimeconfig.cache
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Debug\net8.0\ref\Maintenance.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Debug\net8.0\Maintenance.sourcelink.json
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\bin\Debug\net8.0\SAPBusinessOneSDK.dll

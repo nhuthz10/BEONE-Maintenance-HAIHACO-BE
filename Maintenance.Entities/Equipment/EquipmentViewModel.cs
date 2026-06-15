@@ -32,6 +32,7 @@ namespace Maintenance.Entities.Equipment
         public string? LastMaintBy { get; set; }
         public DateTime? LastMaintDate { get; set; }
         public DateTime? NextMaintDate { get; set; }
+        public int? IsNoti { get; set; }
         public string IsActive { get; set; }
         public int? ReminderDays { get; set; }
         public List<EquipmentCheckListViewModel>? CheckLists { get; set; }

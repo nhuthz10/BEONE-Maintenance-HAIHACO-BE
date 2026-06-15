@@ -199,6 +199,36 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Auth
             catch (Exception ex) { throw new Exception(ex.Message, ex); }
         }
 
+        public async Task<OperationResult<bool>> CreateUser(CreateUserModel model)
+        {
+            try
+            {
+                var existingUser = await _userManager.FindByNameAsync(model.UserName);
+                if (existingUser != null)
+                {
+                    return OperationResult<bool>.Fail(ErrorCode.UserNameAlreadyExists, "UserName already exists");
+                }
+
+                var user = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    FullName = model.FullName,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber
+                };
+
+                var result = await _userManager.CreateAsync(user, "123456aB@");
+                if (!result.Succeeded)
+                {
+                    var errors = string.Join("; ", result.Errors.Select(e => e.Description));
+                    return OperationResult<bool>.Fail(ErrorCode.FailedCreateAccount, errors);
+                }
+
+                return OperationResult<bool>.Success(true, "Created user successfully");
+            }
+            catch (Exception ex) { throw new Exception(ex.Message, ex); }
+        }
+
         public async Task<OperationResult<bool>> LockoutUser(string id)
         {
             try

@@ -13,7 +13,7 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-
+        public int? ItemGroup { get; set; }
         public string ItemCode { get; set; }
         public string? ItemName { get; set; }
         public string? Uom { get; set; }
@@ -43,6 +43,7 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         public string UpdatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }
         public int? ReminderDays { get; set; }
+        public int? IsNoti { get; set; }
         public ICollection<EquipmentCheckLists>? CheckLists { get; set; }
         public ICollection<EquipmentSpareParts>? SpareParts { get; set; }
     }

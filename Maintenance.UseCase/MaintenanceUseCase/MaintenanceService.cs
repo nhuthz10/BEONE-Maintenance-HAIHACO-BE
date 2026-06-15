@@ -71,5 +71,70 @@ namespace Maintenance.UseCase.MaintenanceUseCase
                 throw;
             }
         }
+
+        public async Task<OperationResult<string>> UpdateStatusMaintenance(UpdateMaintenanceStatusModel model)
+        {
+            try
+            {
+                var result = await _maintenanceRepository.UpdateStatusMaintenance(model);
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<OperationResult<string>> CreateItemRequest(CreateItemRequestModel model)
+        {
+            try
+            {
+                var result = await _maintenanceRepository.CreateItemRequest(model);
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<OperationResult<string>> CreatePurchaseRequest(CreatePurchaseRequestModel model)
+        {
+            try
+            {
+                var result = await _maintenanceRepository.CreatePurchaseRequest(model);
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<OperationResult<string>> CreatePurchaseRequestService(CreatePurchaseRequestServiceModel model)
+        {
+            try
+            {
+                var result = await _maintenanceRepository.CreatePurchaseRequestService(model);
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<OperationResult<string>> SaveCheckList(SaveCheckListModel model)
+        {
+            try
+            {
+                var result = await _maintenanceRepository.SaveCheckList(model);
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

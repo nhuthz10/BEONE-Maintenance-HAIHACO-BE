@@ -18,6 +18,9 @@ using Maintenance.UseCase.MaintenanceUseCase;
 using Maintenance.Infrastructure.SqlServer.Repositories.Maintenance;
 using Maintenance.Infrastructure.SqlServer.Repositories.Factory;
 using Maintenance.UseCase.FactoryUseCase;
+using Maintenance.UseCase.SyncDataService;
+using Maintenance.Infrastructure.SqlServer.SyncData;
+using SAPbobsCOM;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,12 +61,47 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 
+builder.Services.AddSingleton<Company>(provider =>
+{
+    var configuration = provider.GetRequiredService<IConfiguration>();
+
+    Console.WriteLine("========== SAP CONFIG ==========");
+    Console.WriteLine($"Server      : {configuration["Connections:Sap:Server"]}");
+    Console.WriteLine($"CompanyDB   : {configuration["Connections:Sap:Company"]}");
+    Console.WriteLine($"UserName    : {configuration["Connections:Sap:UserName"]}");
+    Console.WriteLine($"Password    : {configuration["Connections:Sap:Password"]}");
+    Console.WriteLine($"DbServerType: {BoDataServerTypes.dst_MSSQL2014}");
+    Console.WriteLine("================================");
+
+    var company = new Company();
+
+    company.Server = configuration["Connections:Sap:Server"];
+    company.DbServerType = SAPbobsCOM.BoDataServerTypes.dst_MSSQL2014;
+    company.CompanyDB = configuration["Connections:Sap:Company"];
+    company.UserName = configuration["Connections:Sap:UserName"];
+    company.Password = configuration["Connections:Sap:Password"];
+    company.language = SAPbobsCOM.BoSuppLangs.ln_English;
+    company.UseTrusted = false;
+
+    int result = company.Connect();
+
+    if (result != 0)
+    {
+        company.GetLastError(out int errCode, out string errMsg);
+        throw new Exception(
+            $"SAP DI connect failed: {errCode} - {errMsg}"
+        );
+    }
+    return company;
+});
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddHttpClient();
 
 //Add Service Repository
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<ISyncDataRepository, SyncDataRepository>();
 builder.Services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
 builder.Services.AddScoped<IEquipmentRepository, EquipmentRepository>();
 builder.Services.AddScoped<IFactoryRepository, FactoryRepository>();
@@ -77,7 +115,7 @@ builder.Services.AddScoped<IEquipmentService, EquipmentService>();
 builder.Services.AddScoped<IFactoryService, FactoryService>();
 
 //Add Service Job
-
+builder.Services.AddTransient<SyncDataService>();
 
 builder.Services.AddCors(
     option =>
@@ -99,7 +137,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(
     opt =>
     {
-        opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Approval Api", Version = "v0.0.1" });
+        opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Maintenance Api", Version = "v0.0.1" });
         opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
         {
             In = ParameterLocation.Header,
@@ -123,7 +161,7 @@ builder.Services.AddSwaggerGen(
             new string[]{}
         }
     });
-    });
+});
 
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
@@ -146,7 +184,7 @@ app.UseMiddleware<CustomAuthorizationMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//app.UseMiddleware<VersionValidationMiddleware>();
+app.UseMiddleware<VersionValidationMiddleware>();
 //app.UseMiddleware<DeviceValidationMiddleware>();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -155,15 +193,20 @@ app.MapControllers();
 app.MapHangfireDashboard();
 app.UseStaticFiles();
 
-//var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
-//using (var scope = scopeFactory.CreateScope())
-//{
-   
-//}
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using (var scope = scopeFactory.CreateScope())
+{
+    var syncDataJob = scope.ServiceProvider.GetRequiredService<SyncDataService>();
+    syncDataJob.CreateSyncMachineJob();
+    syncDataJob.CreateSyncEquipmentJob();
+    syncDataJob.CreateSyncDataUserJob();
+    syncDataJob.CreateMaintenancePeriodicJob();
+    syncDataJob.CreateMaintenanceJob();
+}
 
 app.UseHangfireDashboard("/job-dashboard", new DashboardOptions
 {
-    DashboardTitle = "Approval Job Dashboard",
+    DashboardTitle = "Maintenance Job Dashboard",
     DarkModeEnabled = false,
     DisplayStorageConnectionString = false,
     Authorization = new[]

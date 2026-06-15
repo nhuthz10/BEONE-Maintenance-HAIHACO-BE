@@ -45,5 +45,31 @@ namespace Maintenance.Controllers
                 return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
             }
         }
+
+        [Authorize]
+        [HttpGet("getAllSparePart")]
+        public async Task<IActionResult> GetAllSparePart()
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ResponseApi<string>.Error(ErrorCode.ValidationFailed, "Invalid data"));
+                }
+
+                var result = await _equipmentService.GetAllSparePart();
+
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(ResponseApi<string>.Error(result.ErrorCode, result.Message));
+                }
+
+                return Ok(ResponseApi<List<EquipmentViewModel>>.Success(result.Data, result.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
+            }
+        }
     }
 }

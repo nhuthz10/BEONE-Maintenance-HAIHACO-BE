@@ -19,7 +19,7 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         public string? FactoryCode { get; set; }
         public string? FactoryName { get; set; }
         public DateTime DocDate { get; set; }
-        public DateTime DueDate { get; set; }
+        public DateTime? DueDate { get; set; }
         public DateTime? PlannedCompletionDate { get; set; }
         public string? RequestUserCode { get; set; }
         public string? RequestUserName { get; set; }

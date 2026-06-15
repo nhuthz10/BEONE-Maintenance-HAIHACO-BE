@@ -1,0 +1,13 @@
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\bin\Release\net8.0\Maintenance.Entities.deps.json
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\bin\Release\net8.0\Maintenance.Entities.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\bin\Release\net8.0\Maintenance.Entities.pdb
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Release\net8.0\Maintenance.Entities.csproj.AssemblyReference.cache
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Release\net8.0\Maintenance.Entities.GeneratedMSBuildEditorConfig.editorconfig
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Release\net8.0\Maintenance.Entities.AssemblyInfoInputs.cache
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Release\net8.0\Maintenance.Entities.AssemblyInfo.cs
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Release\net8.0\Maintenance.Entities.csproj.CoreCompileInputs.cache
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Release\net8.0\Maintenance.Entities.sourcelink.json
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Release\net8.0\Maintenance.Entities.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Release\net8.0\refint\Maintenance.Entities.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Release\net8.0\Maintenance.Entities.pdb
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Release\net8.0\ref\Maintenance.Entities.dll

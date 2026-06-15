@@ -22,3 +22,4 @@ D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Debug\net8.0\Maint
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Debug\net8.0\refint\Maintenance.Entities.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Debug\net8.0\Maintenance.Entities.pdb
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Debug\net8.0\ref\Maintenance.Entities.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Entities\obj\Debug\net8.0\Maintenance.Entities.sourcelink.json

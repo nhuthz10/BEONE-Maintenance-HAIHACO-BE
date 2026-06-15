@@ -19,6 +19,7 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         public long EquipmentId { get; set; }
         public Equipments Equipment { get; set; }
 
+        public int? LineId { get; set; }
         public string ItemCode { get; set; }
         public string? UomCode { get; set; }
         public string? Quantity { get; set; }

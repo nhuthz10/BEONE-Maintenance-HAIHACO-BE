@@ -12,6 +12,7 @@ namespace Maintenance.UseCase.AuthUseCase
     {
         public Task<OperationResult<ViewLoginModel>> AppSignIn(LoginModel model);
         public Task<OperationResult<ViewLoginModel>> SignIn(LoginAdminModel model);
+        public Task<OperationResult<bool>> CreateUser(CreateUserModel model);
         public Task<OperationResult<bool>> UnlockoutUser(string id);
         public Task<OperationResult<bool>> LockoutUser(string id);
         public Task<OperationResult<bool>> CheckLockUser(string id);

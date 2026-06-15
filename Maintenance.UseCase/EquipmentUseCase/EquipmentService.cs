@@ -31,5 +31,18 @@ namespace Maintenance.UseCase.EquipmentUseCase
                 throw;
             }
         }
+
+        public async Task<OperationResult<List<EquipmentViewModel>>> GetAllSparePart()
+        {
+            try
+            {
+                var result = await _equipmentRepository.GetAllSparePart();
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

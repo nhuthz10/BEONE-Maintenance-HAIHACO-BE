@@ -16,10 +16,15 @@ namespace Maintenance.Entities.Maintenance
         public string? FactoryCode { get; set; }
         public string? FactoryName { get; set; }
         public DateTime DocDate { get; set; }
-        public DateTime DueDate { get; set; }
-        public DateTime PlannedCompletionDate { get; set; }
+        public DateTime? DueDate { get; set; }
+        public DateTime? PlannedCompletionDate { get; set; }
+        public string? MaintCycle { get; set; }
+        public string? MaintCycleType { get; set; }
+        public DateTime? LastMaintDate { get; set; }
         public string? RequestUserCode { get; set; }
         public string? RequestUserName { get; set; }
+        public string? Department { get; set; }
+        public string? DepartmentDes { get; set; }
         public string? AssignUser { get; set; }
         public string? AssignUserName { get; set; }
         public string? AssignUserDepartment { get; set; }
@@ -31,6 +36,8 @@ namespace Maintenance.Entities.Maintenance
         public string? Dscription { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string? UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
 
         public List<MaintenanceDocViewModel>? MaintenanceDocs { get; set; }
         public List<MaintenenceAttachmentViewModel>? MaintenenceAttachments { get; set; }
@@ -66,6 +73,7 @@ namespace Maintenance.Entities.Maintenance
     }
     public class MaintenenceCheckListViewModel
     {
+        public int Id { get; set; }
         public string? JobType { get; set; }
         public string? CheckItem { get; set; }
         public string? EvaluationStandard { get; set; }

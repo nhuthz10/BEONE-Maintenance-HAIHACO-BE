@@ -42,4 +42,10 @@
     <ProjectReference Include="..\Maintenance.Entities\Maintenance.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="SAPBusinessOneSDK">
+      <HintPath>C:\Program Files (x86)\SAP\SAP Business One SDK\Lib\SAPBusinessOneSDK.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

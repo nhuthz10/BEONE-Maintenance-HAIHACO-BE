@@ -1,6 +1,26 @@
 {
   "Files": [
     {
+      "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\13\\7cd179cf5de8403c91b891775bad1152.jpg",
+      "PackagePath": "staticwebassets\\Upload\\Maintenance\\13\\7cd179cf5de8403c91b891775bad1152.jpg"
+    },
+    {
+      "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\13\\db84e885250f401c99c5251b32bccbfb.jpg",
+      "PackagePath": "staticwebassets\\Upload\\Maintenance\\13\\db84e885250f401c99c5251b32bccbfb.jpg"
+    },
+    {
+      "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\42\\099cebcb554c4e9b8f13f743dd06f439.jpg",
+      "PackagePath": "staticwebassets\\Upload\\Maintenance\\42\\099cebcb554c4e9b8f13f743dd06f439.jpg"
+    },
+    {
+      "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\42\\c1b3df2ebfa84fde9cc3e4fedc9162fe.jpg",
+      "PackagePath": "staticwebassets\\Upload\\Maintenance\\42\\c1b3df2ebfa84fde9cc3e4fedc9162fe.jpg"
+    },
+    {
+      "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\4\\e8ba3df94c254721aa1990f44f97c080.jpg",
+      "PackagePath": "staticwebassets\\Upload\\Maintenance\\4\\e8ba3df94c254721aa1990f44f97c080.jpg"
+    },
+    {
       "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },

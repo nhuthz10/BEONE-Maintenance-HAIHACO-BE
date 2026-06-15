@@ -25,9 +25,9 @@ namespace Maintenance.Middleware
                 "/api/b1cs/v1/auth/lockUser",
                 "/api/b1cs/v1/auth/unLockUser",
                 "/hangfire",
-                "/job-dashboard"
+                "/job-dashboard",
+                "/Upload"
             };
-
 
             var path = context.Request.Path.Value?.ToLower();
 

@@ -36,3 +36,5 @@ D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.UseCase\obj\Debug\net8.0\refint
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.UseCase\obj\Debug\net8.0\Maintenance.UseCase.pdb
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.UseCase\obj\Debug\net8.0\Maintenance.UseCase.genruntimeconfig.cache
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.UseCase\obj\Debug\net8.0\ref\Maintenance.UseCase.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.UseCase\obj\Debug\net8.0\Maintenance.UseCase.sourcelink.json
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.UseCase\bin\Debug\net8.0\SAPBusinessOneSDK.dll

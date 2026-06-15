@@ -32,3 +32,5 @@ D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Infrastructure.SqlServer\obj\De
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Infrastructure.SqlServer\obj\Debug\net8.0\Maintenance.Infrastructure.SqlServer.pdb
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Infrastructure.SqlServer\obj\Debug\net8.0\Maintenance.Infrastructure.SqlServer.genruntimeconfig.cache
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Infrastructure.SqlServer\obj\Debug\net8.0\ref\Maintenance.Infrastructure.SqlServer.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Infrastructure.SqlServer\obj\Debug\net8.0\Maintenance.Infrastructure.SqlServer.sourcelink.json
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance.Infrastructure.SqlServer\bin\Debug\net8.0\SAPBusinessOneSDK.dll

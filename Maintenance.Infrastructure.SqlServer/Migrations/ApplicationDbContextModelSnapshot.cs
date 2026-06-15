@@ -34,6 +34,12 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Department")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartmentDes")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DeviceId")
                         .HasColumnType("nvarchar(max)");
 
@@ -45,7 +51,6 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -74,6 +79,9 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Position")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -99,19 +107,19 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "84428f02-67b7-49ed-8f54-c1ec052193c6",
+                            Id = "a740cbaf-b120-4141-a08c-dc9178366044",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fd339258-b881-48c0-bffe-934b2b5d6459",
+                            ConcurrencyStamp = "2e3076ef-b4d9-4b8d-9454-56c10c819a4c",
                             Email = "supperadmin.sys@system.vn",
                             EmailConfirmed = true,
                             FullName = "Supper Admin",
                             IsActive = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "SUPPERADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFx9+czEaMq+juw1TK34WTgG9ulcHOl9kHhMl8EE8EUxGf7+T8y7XEgbGmYA9I1ukg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKxzR/X/uWG08RM4vV9t+Rw6Wfwr7k9iD5qR+2kI97exA0loVwhQuUKcRZ7cA8YA7g==",
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "534c3a3a-9924-4ee4-816d-f425cb6ec6df",
+                            SecurityStamp = "bb7ee53d-f891-42b9-9ee2-cdc003fca629",
                             TwoFactorEnabled = false,
                             UserName = "SupperAdmin"
                         });
@@ -140,6 +148,9 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
 
                     b.Property<string>("JobType")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("LineId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PassStatus")
                         .IsRequired()
@@ -177,6 +188,9 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                     b.Property<string>("ItemCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("LineId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Quantity")
                         .HasColumnType("nvarchar(max)");
@@ -222,9 +236,15 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("IsNoti")
+                        .HasColumnType("int");
+
                     b.Property<string>("ItemCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ItemGroup")
+                        .HasColumnType("int");
 
                     b.Property<string>("ItemName")
                         .HasColumnType("nvarchar(max)");
@@ -384,12 +404,21 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                     b.Property<string>("AssignUserDepartmentDes")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AssignUserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Department")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartmentDes")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DocDate")
                         .HasColumnType("datetime2");
@@ -401,7 +430,7 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                     b.Property<string>("Dscription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DueDate")
+                    b.Property<DateTime?>("DueDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FactoryCode")
@@ -468,6 +497,9 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<int?>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Type")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -575,21 +607,21 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a6abae4b-7bbf-4ad3-b81d-adda4bcecc4e",
+                            Id = "083b705e-30fd-4f2a-9266-826b3c018dfd",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a31bc843-4167-4a19-a558-bf0d534da4ea",
+                            Id = "35ebc014-4ec3-43fc-9ef7-27cb0c51b09f",
                             ConcurrencyStamp = "2",
                             Name = "Technical",
                             NormalizedName = "TECHNICAL"
                         },
                         new
                         {
-                            Id = "1c7e58f2-c1a3-45f6-9323-3eb0156a8b12",
+                            Id = "ea912f59-74ae-4bb9-9c15-a7cccf97ce38",
                             ConcurrencyStamp = "3",
                             Name = "User",
                             NormalizedName = "USER"
@@ -685,8 +717,8 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "84428f02-67b7-49ed-8f54-c1ec052193c6",
-                            RoleId = "a6abae4b-7bbf-4ad3-b81d-adda4bcecc4e"
+                            UserId = "a740cbaf-b120-4141-a08c-dc9178366044",
+                            RoleId = "083b705e-30fd-4f2a-9266-826b3c018dfd"
                         });
                 });
 

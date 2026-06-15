@@ -131,5 +131,153 @@ namespace Maintenance.Controllers
                 return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
             }
         }
+
+        [Authorize]
+        [HttpPost("updateStatusMaintenance")]
+        public async Task<IActionResult> UpdateStatusMaintenance([FromForm] UpdateMaintenanceStatusDto model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ResponseApi<string>.Error(ErrorCode.ValidationFailed, "Invalid data"));
+                }
+
+                var newModel = _mapper.Map<UpdateMaintenanceStatusModel>(model);
+
+                newModel.AccountId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+                var result = await _maintenanceService.UpdateStatusMaintenance(newModel);
+
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(ResponseApi<string>.Error(result.ErrorCode, result.Message));
+                }
+
+                return Ok(ResponseApi<string>.Success(result.Data, result.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
+            }
+        }
+
+        [Authorize]
+        [HttpPost("createItemRequest")]
+        public async Task<IActionResult> CreateItemRequest([FromBody] CreateItemRequestDto model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ResponseApi<string>.Error(ErrorCode.ValidationFailed, "Invalid data"));
+                }
+
+                var newModel = _mapper.Map<CreateItemRequestModel>(model);
+
+                newModel.AccountId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+                var result = await _maintenanceService.CreateItemRequest(newModel);
+
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(ResponseApi<string>.Error(result.ErrorCode, result.Message));
+                }
+
+                return Ok(ResponseApi<string>.Success(result.Data, result.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
+            }
+        }
+
+        [Authorize]
+        [HttpPost("createPurchaseRequest")]
+        public async Task<IActionResult> CreatePurchaseRequest([FromBody] CreatePurchaseRequestDto model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ResponseApi<string>.Error(ErrorCode.ValidationFailed, "Invalid data"));
+                }
+
+                var newModel = _mapper.Map<CreatePurchaseRequestModel>(model);
+
+                newModel.AccountId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+                var result = await _maintenanceService.CreatePurchaseRequest(newModel);
+
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(ResponseApi<string>.Error(result.ErrorCode, result.Message));
+                }
+
+                return Ok(ResponseApi<string>.Success(result.Data, result.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
+            }
+        }
+
+        [Authorize]
+        [HttpPost("createPurchaseRequestService")]
+        public async Task<IActionResult> CreatePurchaseRequestService([FromBody] CreatePurchaseRequestServiceDto model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ResponseApi<string>.Error(ErrorCode.ValidationFailed, "Invalid data"));
+                }
+
+                var newModel = _mapper.Map<CreatePurchaseRequestServiceModel>(model);
+
+                newModel.AccountId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+                var result = await _maintenanceService.CreatePurchaseRequestService(newModel);
+
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(ResponseApi<string>.Error(result.ErrorCode, result.Message));
+                }
+
+                return Ok(ResponseApi<string>.Success(result.Data, result.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
+            }
+        }
+
+        [Authorize]
+        [HttpPost("saveCheckList")]
+        public async Task<IActionResult> SaveCheckList([FromBody] SaveCheckListDto model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ResponseApi<string>.Error(ErrorCode.ValidationFailed, "Invalid data"));
+                }
+
+                var newModel = _mapper.Map<SaveCheckListModel>(model);
+
+                var result = await _maintenanceService.SaveCheckList(newModel);
+
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(ResponseApi<string>.Error(result.ErrorCode, result.Message));
+                }
+
+                return Ok(ResponseApi<string>.Success(result.Data, result.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
+            }
+        }
     }
 }

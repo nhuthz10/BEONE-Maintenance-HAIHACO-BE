@@ -17,6 +17,19 @@ namespace Maintenance.MapperProfile
             CreateMap<CreateMaintenanceDto, CreateMaintenanceModel>();
 
             CreateMap<CreateMaintenenceAttachmentDto, CreateMaintenenceAttachmentModel>();
+
+            CreateMap<UpdateMaintenanceStatusDto, UpdateMaintenanceStatusModel>();
+
+            CreateMap<CreateItemRequestDto, CreateItemRequestModel>();
+
+            CreateMap<MaintenenceSparePartViewDto, MaintenenceSparePartViewModel>();
+
+            CreateMap<CreatePurchaseRequestDto, CreatePurchaseRequestModel>();
+
+            CreateMap<CreatePurchaseRequestServiceDto, CreatePurchaseRequestServiceModel>();
+
+            CreateMap<SaveCheckListDto, SaveCheckListModel>();
+
         }
     }
 }
