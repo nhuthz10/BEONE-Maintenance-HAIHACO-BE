@@ -13,7 +13,11 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public string DocNo { get; set; }
+
         public int MtnType { get; set; }
         public string ItemCode { get; set; }
         public string? FactoryCode { get; set; }

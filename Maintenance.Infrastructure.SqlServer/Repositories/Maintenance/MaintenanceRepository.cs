@@ -2,6 +2,7 @@
 using Equipment.Infrastructure.SqlServer.Repositories.Equipment;
 using Maintenance.Entities.Maintenance;
 using Maintenance.Entities.Responses;
+using Maintenance.Entities.Sap;
 using Maintenance.Infrastructure.SqlServer.Common;
 using Maintenance.Infrastructure.SqlServer.Data;
 using Maintenance.Infrastructure.SqlServer.Entities;
@@ -581,13 +582,8 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 if (item == null)
                     return OperationResult<string>.Fail(ErrorCode.NotFound, "Can not find equipment");
 
-                var maintenanceLast = await _context.Maintenances.OrderByDescending(x => x.Id).FirstOrDefaultAsync();
-
-                var nextNumber = (maintenanceLast?.Id ?? 0) + 1;
-
                 var maintenance = new Maintenances
                 {
-                    DocNo = $"W-O{nextNumber:D5}",
                     MtnType = model.MtnType,
                     ItemCode = model.ItemCode,
                     FactoryCode = item.FactoryCode,
@@ -719,20 +715,15 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
 
             try
             {
-                var lastId = await _context.Maintenances
-                    .MaxAsync(x => (long?)x.Id) ?? 0;
 
                 foreach (var equipment in maintenanceEquipments)
                 {
-                    lastId++;
-
                     if (equipment.EquipManager == null) continue;
                     var user = await _userManager.FindByNameAsync(equipment.EquipManager);
                     if (user == null) continue;
 
                     var maintenance = new Maintenances
                     {
-                        DocNo = $"W-O{lastId:D5}",
                         MtnType = 1,
 
                         ItemCode = equipment.ItemCode,
@@ -975,20 +966,64 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
 
                 SAPbobsCOM.Documents purchaseRequest = (SAPbobsCOM.Documents)_oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oPurchaseRequest);
 
+
+                var parameters = new[]
+                    {
+                        new SqlParameter("@UserId", SqlDbType.NVarChar)
+                        {
+                            Value = user.UserName
+                        },
+                        new SqlParameter("@Type", SqlDbType.NVarChar)
+                        {
+                            Value = "PurchaseRequest"
+                        }
+                    };
+
+                var dimension = _dataContext.ExecuteStoredProcedure<DimensionViewModel>("B1CS_GET_DIMENSION", SqlDbTarget.HaiHaCo, parameters).FirstOrDefault();
+
                 purchaseRequest.DocDate = DateTime.Today;
                 purchaseRequest.RequriedDate = DateTime.Today;
                 purchaseRequest.BPL_IDAssignedToInvoice = 1;
+                purchaseRequest.UserFields.Fields.Item("U_WONo").Value = maintenance.DocNo;
+                purchaseRequest.UserFields.Fields.Item("U_OriType").Value = "3";
+
+                var factoryCode = _context.Equipments.FirstOrDefault(x => x.ItemCode == maintenance.ItemCode)?.FactoryCode;
+
+                var parameterWarehouses = new[]
+                {
+                        new SqlParameter("@UserId", SqlDbType.NVarChar)
+                        {
+                            Value = user.UserName
+                        },
+                        new SqlParameter("@Type", SqlDbType.NVarChar)
+                        {
+                            Value = "PurchaseRequest"
+                        },
+                        new SqlParameter("@Factory", SqlDbType.NVarChar)
+                        {
+                            Value = string.IsNullOrEmpty(factoryCode) ? "" : factoryCode
+                        },
+                    };
+
+                var warehouse = _dataContext.ExecuteStoredProcedure<WarehouseViewModel>("B1CS_GET_WAREHOUSE", SqlDbTarget.HaiHaCo, parameterWarehouses).FirstOrDefault();
 
                 foreach (var item in model.PurchaseRequest)
                 {
-                    var whsCode = _context.Equipments.FirstOrDefault(x => x.ItemCode == item.ItemCode)?.FactoryCode;
-
                     purchaseRequest.Lines.ItemCode = item.ItemCode;
                     purchaseRequest.Lines.ItemDescription = item.ItemName;
-                    purchaseRequest.Lines.WarehouseCode = whsCode;
+                    purchaseRequest.Lines.WarehouseCode = warehouse?.WhsCode;
                     purchaseRequest.Lines.Quantity = item.Quantity ?? 0;
                     purchaseRequest.Lines.UoMEntry = GetUomEntryByUomCode(item.UomCode ?? "");
-
+                    if (!string.IsNullOrEmpty(dimension?.Dimension1))
+                        purchaseRequest.Lines.CostingCode = dimension.Dimension1;
+                    if (!string.IsNullOrEmpty(dimension?.Dimension2))
+                        purchaseRequest.Lines.CostingCode = dimension.Dimension2;
+                    if (!string.IsNullOrEmpty(dimension?.Dimension3))
+                        purchaseRequest.Lines.CostingCode = dimension.Dimension3;
+                    if (!string.IsNullOrEmpty(dimension?.Dimension4))
+                        purchaseRequest.Lines.CostingCode = dimension.Dimension4;
+                    if (!string.IsNullOrEmpty(dimension?.Dimension5))
+                        purchaseRequest.Lines.CostingCode = dimension.Dimension5;
                     purchaseRequest.Lines.Add();
                 }
 
@@ -1067,9 +1102,25 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
 
                 SAPbobsCOM.Documents purchaseRequest = (SAPbobsCOM.Documents)_oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oPurchaseRequest);
 
+                var parameters = new[]
+                    {
+                        new SqlParameter("@UserId", SqlDbType.NVarChar)
+                        {
+                            Value = user.UserName
+                        },
+                        new SqlParameter("@Type", SqlDbType.NVarChar)
+                        {
+                            Value = "PurchaseRequest"
+                        }
+                    };
+
+                var dimension = _dataContext.ExecuteStoredProcedure<DimensionViewModel>("B1CS_GET_DIMENSION", SqlDbTarget.HaiHaCo, parameters).FirstOrDefault();
+
                 purchaseRequest.DocDate = DateTime.Today;
                 purchaseRequest.RequriedDate = DateTime.Today;
                 purchaseRequest.BPL_IDAssignedToInvoice = 1;
+                purchaseRequest.UserFields.Fields.Item("U_WONo").Value = maintenance.DocNo;
+                purchaseRequest.UserFields.Fields.Item("U_OriType").Value = "3";
                 purchaseRequest.Comments = model.Content;
 
                 purchaseRequest.Lines.ItemCode = "90000058";
@@ -1077,6 +1128,16 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 purchaseRequest.Lines.Quantity = 1;
                 purchaseRequest.Lines.UoMEntry = 77;
                 purchaseRequest.Lines.RequiredDate = model.TimeRequiredService;
+                if (!string.IsNullOrEmpty(dimension?.Dimension1))
+                    purchaseRequest.Lines.CostingCode = dimension.Dimension1;
+                if (!string.IsNullOrEmpty(dimension?.Dimension2))
+                    purchaseRequest.Lines.CostingCode = dimension.Dimension2;
+                if (!string.IsNullOrEmpty(dimension?.Dimension3))
+                    purchaseRequest.Lines.CostingCode = dimension.Dimension3;
+                if (!string.IsNullOrEmpty(dimension?.Dimension4))
+                    purchaseRequest.Lines.CostingCode = dimension.Dimension4;
+                if (!string.IsNullOrEmpty(dimension?.Dimension5))
+                    purchaseRequest.Lines.CostingCode = dimension.Dimension5;
 
                 int sapResult = purchaseRequest.Add();
 
@@ -1150,8 +1211,8 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                     return OperationResult<string>.Fail(ErrorCode.NotFound, "Can not find user");
 
                 maintenance.Status = model.Status;
-                maintenance.Remark = model.Remark; 
-                maintenance.UpdatedBy = user.UserName;
+                maintenance.Remark = model.Remark;
+                maintenance.UpdatedBy = model.AccountId;
                 maintenance.UpdatedDate = DateTime.Now;
 
                 if(model.Status == 2)

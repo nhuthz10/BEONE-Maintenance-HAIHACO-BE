@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AA9602CE-0AD9-4B6D-8D0F-5D18A3DB2F69}|Maintenance.Infrastructure.SqlServer\\Maintenance.Infrastructure.SqlServer.csproj|d:\\mobile\\app_maintenance_haihaco\\be\\maintenance.infrastructure.sqlserver\\repositories\\maintenance\\maintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AA9602CE-0AD9-4B6D-8D0F-5D18A3DB2F69}|Maintenance.Infrastructure.SqlServer\\Maintenance.Infrastructure.SqlServer.csproj|solutionrelative:maintenance.infrastructure.sqlserver\\repositories\\maintenance\\maintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A662B207-9A97-4D3E-8D58-1E7A941124D5}|Maintenance\\Maintenance.csproj|d:\\mobile\\app_maintenance_haihaco\\be\\maintenance\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A662B207-9A97-4D3E-8D58-1E7A941124D5}|Maintenance\\Maintenance.csproj|solutionrelative:maintenance\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AA9602CE-0AD9-4B6D-8D0F-5D18A3DB2F69}|Maintenance.Infrastructure.SqlServer\\Maintenance.Infrastructure.SqlServer.csproj|d:\\mobile\\app_maintenance_haihaco\\be\\maintenance.infrastructure.sqlserver\\syncdata\\syncdatarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AA9602CE-0AD9-4B6D-8D0F-5D18A3DB2F69}|Maintenance.Infrastructure.SqlServer\\Maintenance.Infrastructure.SqlServer.csproj|solutionrelative:maintenance.infrastructure.sqlserver\\syncdata\\syncdatarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A662B207-9A97-4D3E-8D58-1E7A941124D5}|Maintenance\\Maintenance.csproj|d:\\mobile\\app_maintenance_haihaco\\be\\maintenance\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{A662B207-9A97-4D3E-8D58-1E7A941124D5}|Maintenance\\Maintenance.csproj|solutionrelative:maintenance\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{592FF4AB-1CBB-499A-800B-0ED135215DCC}|Maintenance.UseCase\\Maintenance.UseCase.csproj|d:\\mobile\\app_maintenance_haihaco\\be\\maintenance.usecase\\syncdataservice\\syncdataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{592FF4AB-1CBB-499A-800B-0ED135215DCC}|Maintenance.UseCase\\Maintenance.UseCase.csproj|solutionrelative:maintenance.usecase\\syncdataservice\\syncdataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AA9602CE-0AD9-4B6D-8D0F-5D18A3DB2F69}|Maintenance.Infrastructure.SqlServer\\Maintenance.Infrastructure.SqlServer.csproj|d:\\mobile\\app_maintenance_haihaco\\be\\maintenance.infrastructure.sqlserver\\repositories\\maintenance\\maintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA9602CE-0AD9-4B6D-8D0F-5D18A3DB2F69}|Maintenance.Infrastructure.SqlServer\\Maintenance.Infrastructure.SqlServer.csproj|solutionrelative:maintenance.infrastructure.sqlserver\\repositories\\maintenance\\maintenancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A662B207-9A97-4D3E-8D58-1E7A941124D5}|Maintenance\\Maintenance.csproj|d:\\mobile\\app_maintenance_haihaco\\be\\maintenance\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,74 +34,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MaintenanceRepository.cs",
               "DocumentMoniker": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\MaintenanceRepository.cs",
               "RelativeDocumentMoniker": "Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\MaintenanceRepository.cs",
               "ToolTip": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\MaintenanceRepository.cs",
               "RelativeToolTip": "Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\MaintenanceRepository.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAQwFcCAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAwAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T13:46:01.635Z",
+              "WhenOpened": "2026-06-16T02:42:16.509Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\appsettings.json",
               "RelativeDocumentMoniker": "Maintenance\\appsettings.json",
               "ToolTip": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\appsettings.json",
               "RelativeToolTip": "Maintenance\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAiwCIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-06-14T10:48:47.962Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SyncDataService.cs",
-              "DocumentMoniker": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance.UseCase\\SyncDataService\\SyncDataService.cs",
-              "RelativeDocumentMoniker": "Maintenance.UseCase\\SyncDataService\\SyncDataService.cs",
-              "ToolTip": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance.UseCase\\SyncDataService\\SyncDataService.cs",
-              "RelativeToolTip": "Maintenance.UseCase\\SyncDataService\\SyncDataService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T10:38:21.443Z"
+              "WhenOpened": "2026-06-15T16:25:41.958Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "SyncDataRepository.cs",
-              "DocumentMoniker": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance.Infrastructure.SqlServer\\SyncData\\SyncDataRepository.cs",
-              "RelativeDocumentMoniker": "Maintenance.Infrastructure.SqlServer\\SyncData\\SyncDataRepository.cs",
-              "ToolTip": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance.Infrastructure.SqlServer\\SyncData\\SyncDataRepository.cs",
-              "RelativeToolTip": "Maintenance.Infrastructure.SqlServer\\SyncData\\SyncDataRepository.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAALwAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-14T08:08:29.425Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Maintenance\\Properties\\launchSettings.json",
-              "ToolTip": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Maintenance\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-06-14T07:32:05.573Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\Program.cs",
               "RelativeDocumentMoniker": "Maintenance\\Program.cs",
               "ToolTip": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\Program.cs",
               "RelativeToolTip": "Maintenance\\Program.cs",
-              "ViewState": "AgIAAK4AAAAAAAAAAAAAAMoAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAASwFoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-11T11:40:32.335Z"
             }

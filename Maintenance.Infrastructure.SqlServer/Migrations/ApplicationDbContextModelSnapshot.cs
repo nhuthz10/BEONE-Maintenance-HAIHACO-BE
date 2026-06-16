@@ -107,19 +107,19 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a740cbaf-b120-4141-a08c-dc9178366044",
+                            Id = "41f587c9-97d7-43b6-bb25-37a546c9f9e6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2e3076ef-b4d9-4b8d-9454-56c10c819a4c",
+                            ConcurrencyStamp = "0c72841c-414b-41e6-a21c-262017feba43",
                             Email = "supperadmin.sys@system.vn",
                             EmailConfirmed = true,
                             FullName = "Supper Admin",
                             IsActive = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "SUPPERADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKxzR/X/uWG08RM4vV9t+Rw6Wfwr7k9iD5qR+2kI97exA0loVwhQuUKcRZ7cA8YA7g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELeKesnLsH7u4p2jfT8YyEat3szeJwMbXj5cyY4cfVGBdOhAhepvd+DJjQvrt1yDgQ==",
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bb7ee53d-f891-42b9-9ee2-cdc003fca629",
+                            SecurityStamp = "55b06651-71c3-4956-8c06-ab7e0a780c90",
                             TwoFactorEnabled = false,
                             UserName = "SupperAdmin"
                         });
@@ -425,7 +425,9 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
 
                     b.Property<string>("DocNo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("nvarchar(max)")
+                        .HasComputedColumnSql("'W-O' +\r\n                  CASE\r\n                      WHEN Id < 100000\r\n                          THEN RIGHT('00000' + CAST(Id AS VARCHAR(20)), 5)\r\n                      ELSE CAST(Id AS VARCHAR(20))\r\n                  END", true);
 
                     b.Property<string>("Dscription")
                         .HasColumnType("nvarchar(max)");
@@ -607,21 +609,21 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "083b705e-30fd-4f2a-9266-826b3c018dfd",
+                            Id = "72db1411-ee87-4339-ba05-713ff713afa0",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "35ebc014-4ec3-43fc-9ef7-27cb0c51b09f",
+                            Id = "b2bbef05-1a2b-4f0e-9007-1cf6d1a9a4c4",
                             ConcurrencyStamp = "2",
                             Name = "Technical",
                             NormalizedName = "TECHNICAL"
                         },
                         new
                         {
-                            Id = "ea912f59-74ae-4bb9-9c15-a7cccf97ce38",
+                            Id = "6eb1bf8a-ab85-4e2e-b17c-7cb43a9ffda2",
                             ConcurrencyStamp = "3",
                             Name = "User",
                             NormalizedName = "USER"
@@ -717,8 +719,8 @@ namespace Maintenance.Infrastructure.SqlServer.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "a740cbaf-b120-4141-a08c-dc9178366044",
-                            RoleId = "083b705e-30fd-4f2a-9266-826b3c018dfd"
+                            UserId = "41f587c9-97d7-43b6-bb25-37a546c9f9e6",
+                            RoleId = "72db1411-ee87-4339-ba05-713ff713afa0"
                         });
                 });
 

@@ -29,6 +29,18 @@ namespace Maintenance.Infrastructure.SqlServer.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Maintenances>()
+            .Property(x => x.DocNo)
+            .HasComputedColumnSql(
+                @"'W-O' +
+                  CASE
+                      WHEN Id < 100000
+                          THEN RIGHT('00000' + CAST(Id AS VARCHAR(20)), 5)
+                      ELSE CAST(Id AS VARCHAR(20))
+                  END",
+                stored: true);
+
             SeedRoleAndUser(builder);
         }
 
