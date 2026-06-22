@@ -103,6 +103,27 @@ namespace Maintenance.Controllers
         }
 
         [Authorize]
+        [HttpGet("getTrackingPrMaintenance")]
+        public async Task<IActionResult> GetTrackingPrMaintenance(int id)
+        {
+            try
+            {
+                var result = await _maintenanceService.GetTrackingPrMaintenance(id);
+
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(ResponseApi<string>.Error(result.ErrorCode, result.Message));
+                }
+
+                return Ok(ResponseApi<TrackingPrViewModel>.Success(result.Data, result.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
+            }
+        }
+
+        [Authorize]
         [HttpPost("createMaintenance")]
         public async Task<IActionResult> CreateMaintenance([FromForm] CreateMaintenanceDto  model)
         {
@@ -178,6 +199,36 @@ namespace Maintenance.Controllers
                 newModel.AccountId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
                 var result = await _maintenanceService.CreateItemRequest(newModel);
+
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(ResponseApi<string>.Error(result.ErrorCode, result.Message));
+                }
+
+                return Ok(ResponseApi<string>.Success(result.Data, result.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
+            }
+        }
+
+        [Authorize]
+        [HttpPost("createGoodReceipt")]
+        public async Task<IActionResult> CreateGoodReceipt([FromBody] CreateGoodReceiptDto model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ResponseApi<string>.Error(ErrorCode.ValidationFailed, "Invalid data"));
+                }
+
+                var newModel = _mapper.Map<CreateGoodReceiptModel>(model);
+
+                newModel.AccountId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+                var result = await _maintenanceService.CreateRecoveryReceipt(newModel);
 
                 if (!result.IsSuccess)
                 {

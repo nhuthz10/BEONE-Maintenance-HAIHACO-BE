@@ -20,6 +20,7 @@ namespace Maintenance.Entities.Maintenance
         public DateTime? PlannedCompletionDate { get; set; }
         public string? MaintCycle { get; set; }
         public string? MaintCycleType { get; set; }
+        public int? ReminderDays { get; set; }
         public DateTime? LastMaintDate { get; set; }
         public string? RequestUserCode { get; set; }
         public string? RequestUserName { get; set; }
@@ -38,11 +39,13 @@ namespace Maintenance.Entities.Maintenance
         public DateTime CreatedDate { get; set; }
         public string? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
+        public string? IsCreatedGI { get; set; }
 
         public List<MaintenanceDocViewModel>? MaintenanceDocs { get; set; }
         public List<MaintenenceAttachmentViewModel>? MaintenenceAttachments { get; set; }
         public List<MaintenenceCheckListViewModel>? MaintenenceCheckLists { get; set; }
         public List<MaintenenceSparePartViewModel>? MaintenenceSpareParts { get; set; }
+        public List<GoodIssueViewModel>? GoodIssues { get; set; }
     }
 
     public class MaintenanceDocViewModel
@@ -85,6 +88,15 @@ namespace Maintenance.Entities.Maintenance
     public class MaintenenceSparePartViewModel
     {
         public string? ItemCode { get; set; }
+        public string? ItemName { get; set; }
+        public string? UomCode { get; set; }
+        public double? Quantity { get; set; }
+    }
+
+    public class GoodIssueViewModel
+    {
+        public int LineNum { get; set; }
+        public string ItemCode { get; set; }
         public string? ItemName { get; set; }
         public string? UomCode { get; set; }
         public double? Quantity { get; set; }

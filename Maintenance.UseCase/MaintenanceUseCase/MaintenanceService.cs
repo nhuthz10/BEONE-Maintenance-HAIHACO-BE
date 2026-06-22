@@ -98,6 +98,19 @@ namespace Maintenance.UseCase.MaintenanceUseCase
             }
         }
 
+        public async Task<OperationResult<string>> CreateRecoveryReceipt(CreateGoodReceiptModel model)
+        {
+            try
+            {
+                var result = await _maintenanceRepository.CreateRecoveryReceipt(model);
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public async Task<OperationResult<string>> CreatePurchaseRequest(CreatePurchaseRequestModel model)
         {
             try
@@ -116,6 +129,19 @@ namespace Maintenance.UseCase.MaintenanceUseCase
             try
             {
                 var result = await _maintenanceRepository.CreatePurchaseRequestService(model);
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<OperationResult<TrackingPrViewModel>> GetTrackingPrMaintenance(int id)
+        {
+            try
+            {
+                var result = await _maintenanceRepository.GetTrackingPrMaintenance(id);
                 return result;
             }
             catch

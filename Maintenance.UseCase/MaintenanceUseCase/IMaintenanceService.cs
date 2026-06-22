@@ -13,7 +13,9 @@ namespace Maintenance.UseCase.MaintenanceUseCase
         public Task<OperationResult<AllMaintenanceViewModel>> GetAllMaintenance(FindMaintenanceCreterias maintenanceCreterias);
         public Task<OperationResult<AllMaintenanceViewModel>> GetAllMaintenanceTechnical(FindMaintenanceTechnicalCreterias maintenanceCreterias);
         public Task<OperationResult<MaintenanceViewModel>> GetMaintenanceDetail(int id);
+        public Task<OperationResult<TrackingPrViewModel>> GetTrackingPrMaintenance(int id);
         public Task<OperationResult<string>> CreateMaintenance(CreateMaintenanceModel model);
+        public Task<OperationResult<string>> CreateRecoveryReceipt(CreateGoodReceiptModel model);
         public Task<OperationResult<string>> CreatePurchaseRequest(CreatePurchaseRequestModel model);
         public Task<OperationResult<string>> UpdateStatusMaintenance(UpdateMaintenanceStatusModel model);
         public Task<OperationResult<string>> CreateItemRequest(CreateItemRequestModel model);

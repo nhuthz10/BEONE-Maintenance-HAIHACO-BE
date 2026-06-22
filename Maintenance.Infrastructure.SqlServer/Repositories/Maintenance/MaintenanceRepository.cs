@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using static Maintenance.Infrastructure.SqlServer.Data.DataContextSql;
@@ -470,6 +471,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                         Remark = p.GetString("Remark"),
                         Dscription = p.GetString("Dscription"),
                         CreatedBy = p.GetString("CreatedBy"),
+                        IsCreatedGI = p.GetString("IsCreatedGI"),
                         CreatedDate = p.GetDateTime("CreatedDate") ?? DateTime.MinValue
                     })
                     .FirstOrDefault();
@@ -539,6 +541,18 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 })
                 .ToList();
 
+                var goodIssues = dataRows[6]
+                .Select(p => new GoodIssueViewModel
+                {
+                    LineNum = p.GetInt("LineNum") ?? 0,
+                    ItemCode = p.GetString("ItemCode"),
+                    ItemName = p.GetString("ItemName"),
+                    UomCode = p.GetString("UomCode"),
+                    Quantity = p.GetDouble("Quantity")
+                })
+                .Where(g => g.ItemName != null)
+                .ToList();
+
                 var detailLookup = details.ToLookup(x => x.DocId);
 
                 header.MaintenanceDocs = documents
@@ -555,9 +569,68 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 header.MaintenenceAttachments = attachments;
                 header.MaintenenceCheckLists = checkLists;
                 header.MaintenenceSpareParts = spareParts;
-
+                header.GoodIssues = goodIssues;
 
                 return OperationResult<MaintenanceViewModel>.Success(message: "Get maintenance successfully", data: header);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<OperationResult<TrackingPrViewModel>> GetTrackingPrMaintenance(int id)
+        {
+            try
+            {
+                var maintenance = await _context.Maintenances.FirstOrDefaultAsync(i => i.Id == id);
+
+                if (maintenance == null)
+                {
+                    return OperationResult<TrackingPrViewModel>.Fail(ErrorCode.NotFound, "Can not find maintenance");
+                }
+
+                string query = "B1CS_GET_STATUS_PURCHAREQUEST";
+
+                var parameters = new[]
+                {
+                    new SqlParameter("@DocNo", SqlDbType.NVarChar)
+                    {
+                        Value = maintenance.DocNo,
+                    },
+                };
+
+                var dataRows = _dataContext.ExecuteStoredProcedureRawMultiple(query, DataContextSql.SqlDbTarget.Default, parameters);
+
+                var allItems = dataRows
+                    .SelectMany(rows => rows.Select(p => new TrackingPrDetailViewModel
+                    {
+                        Type = p.GetString("Type") ?? "",
+                        Key = p.GetString("Key") ?? "",
+                        Process = p.GetInt("Process") ?? 0,
+                        Value = p.GetString("Value"),
+                        DocNo = p.GetString("DocNo"),
+                        User = p.GetString("User"),
+                        Department = p.GetString("Department"),
+                        Time = p.GetDateTime("Time"),
+                    }))
+                    .ToList();
+
+                var pr = allItems
+                    .Where(i => i.Type == "PurchaseRequest")
+                    .ToList();
+
+                var prService = allItems
+                    .Where(i => i.Type == "PurchaseRequestService")
+                    .ToList();
+
+                var result = new TrackingPrViewModel
+                {
+                    Item = pr,
+                    Service = prService,
+                };
+
+                return OperationResult<TrackingPrViewModel>.Success(message: "Get tracking pr maintenance successfully", data: result);
             }
             catch (Exception ex)
             {
@@ -594,6 +667,8 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                     RequestUserName = user.FullName,
                     Department = user.Department,
                     DepartmentDes = user.DepartmentDes,
+                    DefaultWhsGI = item.DefaultWhsGI,
+                    DefaultWhsPR = item.DefaultWhsPR,
 
                     Dscription = model.Dscription,
 
@@ -741,6 +816,9 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                         AssignUserDepartment = user?.Department,
                         AssignUserDepartmentDes = user?.DepartmentDes,
 
+                        DefaultWhsGI = equipment.DefaultWhsGI,
+                        DefaultWhsPR = equipment.DefaultWhsPR,
+
                         ApproveStatus = 1,
                         Status = 0,
 
@@ -804,6 +882,184 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
             }
         }
 
+        public async Task<OperationResult<string>> CreateRecoveryReceipt(CreateGoodReceiptModel model)
+        {
+            await using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var user = await _userManager.FindByIdAsync(model.AccountId);
+
+                if (user == null)
+                {
+                    return OperationResult<string>.Fail(ErrorCode.NotFound, "Can not find user");
+                }
+
+                var maintenance = await _context.Maintenances.FirstOrDefaultAsync(i => i.Id == model.Id);
+
+                if (maintenance == null)
+                {
+                    return OperationResult<string>.Fail(ErrorCode.NotFound, "Can not find maintenance");
+                }
+
+                var machine = await _context.Equipments.FirstOrDefaultAsync(i => i.ItemCode == maintenance.ItemCode);
+
+                if (machine == null)
+                {
+                    return OperationResult<string>.Fail(ErrorCode.NotFound, "Can not find machine");
+                }
+
+                var reasonGoodIssue = _dataContext.ExecuteQuery<string?>($@"SELECT TOP 1 T1.U_Reason FROM OIGE T0 INNER JOIN IGE1 T1 ON T0.DocEntry = T1.DocEntry where T0.U_WONo = '{maintenance.DocNo}'", SqlDbTarget.HaiHaCo).FirstOrDefault();
+
+                var draftResult = CreateGoodsReceiptDraft(model, machine, user.UserName, maintenance.DefaultWhsGI, reasonGoodIssue);
+
+                if (!draftResult.Success)
+                {
+                    return OperationResult<string>.Fail(ErrorCode.ErrorSap, draftResult.ErrorMessage ?? "");
+                }
+
+                var draftDocEntry = draftResult.DocEntry;
+                var draftDocNum = draftResult.DocNum;
+
+                var maintenanceDoc = new MaintenanceDocs
+                {
+                    HeaderId = maintenance.Id,
+                    DocNo = Convert.ToInt64(draftDocNum),
+                    DocDate = DateTime.Now,
+                    DocType = "GoodReceipt",
+                    Machine = maintenance.ItemCode,
+                    CreatedAt = DateTime.Now,
+                    Details = model.Details.Select(x => new MaintenanceDocDetails
+                    {
+                        ItemCode = x.ItemCode,
+                        Description = x.ItemName,
+                        Quantity = x.Quantity,
+                        UomCode = x.UomCode
+                    }).ToList()
+                };
+
+                await _context.MaintenanceDocs.AddAsync(maintenanceDoc);
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return OperationResult<string>.Success(message: "Create good receipt successfully", data: draftDocNum.ToString() ?? "");
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        }
+
+        public SapDraftResult CreateGoodsReceiptDraft(CreateGoodReceiptModel model, Equipments machine, string userName, string? whsCode, string? reasonGoodIssue)
+        {
+            try
+            {
+                var parameters = new[]
+                {
+                    new SqlParameter("@UserId", SqlDbType.NVarChar)
+                    {
+                        Value = userName
+                    },
+                    new SqlParameter("@AccountCode", SqlDbType.NVarChar)
+                    {
+                        Value = reasonGoodIssue ?? string.Empty
+                    }
+                };
+
+                var account = _dataContext.ExecuteStoredProcedure<AccountViewModel>("B1CS_GET_ACCOUNT_GOOD_RECEIPT", SqlDbTarget.HaiHaCo, parameters).FirstOrDefault();
+
+
+                var parameterDimensions = new[]
+                    {
+                        new SqlParameter("@UserId", SqlDbType.NVarChar)
+                        {
+                            Value = userName
+                        },
+                        new SqlParameter("@Type", SqlDbType.NVarChar)
+                        {
+                            Value = "GoodsReceipt"
+                        }
+                    };
+
+                var dimension = _dataContext.ExecuteStoredProcedure<DimensionViewModel>("B1CS_GET_DIMENSION", SqlDbTarget.HaiHaCo, parameterDimensions).FirstOrDefault();
+
+
+                SAPbobsCOM.Documents oDraft = (SAPbobsCOM.Documents)_oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oDrafts);
+                oDraft.DocObjectCode = SAPbobsCOM.BoObjectTypes.oInventoryGenEntry;
+                oDraft.BPL_IDAssignedToInvoice = 1;
+
+                if (model.Details != null)
+                {
+                    int index = 0;
+
+                    foreach (var line in model.Details)
+                    {
+                        if (index > 0)
+                            oDraft.Lines.Add();
+
+                        oDraft.Lines.ItemCode = line.ItemCode;
+                        oDraft.Lines.ItemDescription = line.ItemName;
+                        oDraft.Lines.UoMEntry = GetUomEntryByUomCode(line.UomCode ?? "");
+                        oDraft.Lines.Quantity = line.Quantity ?? 0;
+                        oDraft.Lines.UnitPrice = 0;
+                        oDraft.Lines.LineTotal = 0;
+                        oDraft.Lines.WarehouseCode = whsCode;
+                        oDraft.Lines.UserFields.Fields.Item("U_Reason").Value = account?.Reason;
+                        oDraft.Lines.AccountCode = account?.AccountCode;
+
+                        if (!string.IsNullOrEmpty(dimension?.Dimension1))
+                            oDraft.Lines.CostingCode = dimension.Dimension1;
+                        if (!string.IsNullOrEmpty(dimension?.Dimension2))
+                            oDraft.Lines.CostingCode2 = dimension.Dimension2;
+                        if (!string.IsNullOrEmpty(dimension?.Dimension3))
+                            oDraft.Lines.CostingCode3 = dimension.Dimension3;
+                        if (!string.IsNullOrEmpty(machine.Line))
+                            oDraft.Lines.CostingCode4 = machine.Line;
+                        if (!string.IsNullOrEmpty(dimension?.Dimension5))
+                            oDraft.Lines.CostingCode5 = dimension.Dimension5;
+
+                        index++;
+                    }
+                }
+
+                int result = oDraft.Add();
+
+                if (result != 0)
+                {
+                    return new SapDraftResult
+                    {
+                        Success = false,
+                        ErrorMessage = _oCompany.GetLastErrorDescription()
+                    };
+                }
+
+                int docEntry = Convert.ToInt32(_oCompany.GetNewObjectKey());
+
+                int? docNum = null;
+
+                var rs = (SAPbobsCOM.Recordset)_oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset);
+
+                rs.DoQuery($@"SELECT DocNum FROM ODRF WHERE DocEntry = {docEntry}");
+
+                if (!rs.EoF)
+                {
+                    docNum = Convert.ToInt32(rs.Fields.Item("DocNum").Value);
+                }
+
+                return new SapDraftResult
+                {
+                    Success = true,
+                    DocEntry = docEntry,
+                    DocNum = docNum
+                };
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<OperationResult<string>> CreateItemRequest(CreateItemRequestModel model)
         {
             await using var transaction = await _context.Database.BeginTransactionAsync();
@@ -817,8 +1073,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                     return OperationResult<string>.Fail(ErrorCode.NotFound, "Can not find user");
                 }
 
-                var maintenance = await _context.Maintenances
-                    .FirstOrDefaultAsync(i => i.Id == model.Id);
+                var maintenance = await _context.Maintenances.FirstOrDefaultAsync(i => i.Id == model.Id);
 
                 if (maintenance == null)
                 {
@@ -860,7 +1115,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 generalData.SetProperty("U_RequestUser", user.UserName);
                 generalData.SetProperty("U_RequestUserName", user.FullName);
                 generalData.SetProperty("U_Type", "1");
-                generalData.SetProperty("U_Factory", maintenance.FactoryCode);
+                generalData.SetProperty("U_Factory", maintenance.DefaultWhsGI ?? "");
                 generalData.SetProperty("U_WONo", maintenance.DocNo);
 
                 foreach (var item in model.SparePart)
@@ -942,6 +1197,13 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                     return OperationResult<string>.Fail(ErrorCode.NotFound, "Can not find maintenance");
                 }
 
+                var machine = await _context.Equipments.FirstOrDefaultAsync(i => i.ItemCode == maintenance.ItemCode);
+
+                if (machine == null)
+                {
+                    return OperationResult<string>.Fail(ErrorCode.NotFound, "Can not find machine");
+                }
+
                 var oldSpareParts = await _context.MaintenenceSpareParts
                     .Where(x => x.HeaderId == maintenance.Id)
                     .ToListAsync();
@@ -966,7 +1228,6 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
 
                 SAPbobsCOM.Documents purchaseRequest = (SAPbobsCOM.Documents)_oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oPurchaseRequest);
 
-
                 var parameters = new[]
                     {
                         new SqlParameter("@UserId", SqlDbType.NVarChar)
@@ -984,46 +1245,28 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 purchaseRequest.DocDate = DateTime.Today;
                 purchaseRequest.RequriedDate = DateTime.Today;
                 purchaseRequest.BPL_IDAssignedToInvoice = 1;
+                purchaseRequest.Requester = user.UserName;
                 purchaseRequest.UserFields.Fields.Item("U_WONo").Value = maintenance.DocNo;
                 purchaseRequest.UserFields.Fields.Item("U_OriType").Value = "3";
-
-                var factoryCode = _context.Equipments.FirstOrDefault(x => x.ItemCode == maintenance.ItemCode)?.FactoryCode;
-
-                var parameterWarehouses = new[]
-                {
-                        new SqlParameter("@UserId", SqlDbType.NVarChar)
-                        {
-                            Value = user.UserName
-                        },
-                        new SqlParameter("@Type", SqlDbType.NVarChar)
-                        {
-                            Value = "PurchaseRequest"
-                        },
-                        new SqlParameter("@Factory", SqlDbType.NVarChar)
-                        {
-                            Value = string.IsNullOrEmpty(factoryCode) ? "" : factoryCode
-                        },
-                    };
-
-                var warehouse = _dataContext.ExecuteStoredProcedure<WarehouseViewModel>("B1CS_GET_WAREHOUSE", SqlDbTarget.HaiHaCo, parameterWarehouses).FirstOrDefault();
+                purchaseRequest.UserFields.Fields.Item("U_Status").Value = "1";
 
                 foreach (var item in model.PurchaseRequest)
                 {
                     purchaseRequest.Lines.ItemCode = item.ItemCode;
                     purchaseRequest.Lines.ItemDescription = item.ItemName;
-                    purchaseRequest.Lines.WarehouseCode = warehouse?.WhsCode;
+                    purchaseRequest.Lines.WarehouseCode = maintenance.DefaultWhsPR ?? "";
                     purchaseRequest.Lines.Quantity = item.Quantity ?? 0;
                     purchaseRequest.Lines.UoMEntry = GetUomEntryByUomCode(item.UomCode ?? "");
                     if (!string.IsNullOrEmpty(dimension?.Dimension1))
                         purchaseRequest.Lines.CostingCode = dimension.Dimension1;
                     if (!string.IsNullOrEmpty(dimension?.Dimension2))
-                        purchaseRequest.Lines.CostingCode = dimension.Dimension2;
+                        purchaseRequest.Lines.CostingCode2 = dimension.Dimension2;
                     if (!string.IsNullOrEmpty(dimension?.Dimension3))
-                        purchaseRequest.Lines.CostingCode = dimension.Dimension3;
-                    if (!string.IsNullOrEmpty(dimension?.Dimension4))
-                        purchaseRequest.Lines.CostingCode = dimension.Dimension4;
+                        purchaseRequest.Lines.CostingCode3 = dimension.Dimension3;
+                    if (!string.IsNullOrEmpty(machine.Line))
+                        purchaseRequest.Lines.CostingCode4 = machine.Line;
                     if (!string.IsNullOrEmpty(dimension?.Dimension5))
-                        purchaseRequest.Lines.CostingCode = dimension.Dimension5;
+                        purchaseRequest.Lines.CostingCode5 = dimension.Dimension5;
                     purchaseRequest.Lines.Add();
                 }
 
@@ -1100,27 +1343,36 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                     return OperationResult<string>.Fail(ErrorCode.NotFound, "Can not find maintenance");
                 }
 
+                var machine = await _context.Equipments.FirstOrDefaultAsync(i => i.ItemCode == maintenance.ItemCode);
+
+                if (machine == null)
+                {
+                    return OperationResult<string>.Fail(ErrorCode.NotFound, "Can not find machine");
+                }
+
                 SAPbobsCOM.Documents purchaseRequest = (SAPbobsCOM.Documents)_oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oPurchaseRequest);
 
                 var parameters = new[]
+                {
+                    new SqlParameter("@UserId", SqlDbType.NVarChar)
                     {
-                        new SqlParameter("@UserId", SqlDbType.NVarChar)
-                        {
-                            Value = user.UserName
-                        },
-                        new SqlParameter("@Type", SqlDbType.NVarChar)
-                        {
-                            Value = "PurchaseRequest"
-                        }
-                    };
+                        Value = user.UserName
+                    },
+                    new SqlParameter("@Type", SqlDbType.NVarChar)
+                    {
+                        Value = "PurchaseRequest"
+                    }
+                };
 
                 var dimension = _dataContext.ExecuteStoredProcedure<DimensionViewModel>("B1CS_GET_DIMENSION", SqlDbTarget.HaiHaCo, parameters).FirstOrDefault();
 
                 purchaseRequest.DocDate = DateTime.Today;
-                purchaseRequest.RequriedDate = DateTime.Today;
+                purchaseRequest.RequriedDate = model.TimeRequiredService;
                 purchaseRequest.BPL_IDAssignedToInvoice = 1;
+                purchaseRequest.Requester = user.UserName;
                 purchaseRequest.UserFields.Fields.Item("U_WONo").Value = maintenance.DocNo;
                 purchaseRequest.UserFields.Fields.Item("U_OriType").Value = "3";
+                purchaseRequest.UserFields.Fields.Item("U_Status").Value = "1";
                 purchaseRequest.Comments = model.Content;
 
                 purchaseRequest.Lines.ItemCode = "90000058";
@@ -1131,13 +1383,13 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 if (!string.IsNullOrEmpty(dimension?.Dimension1))
                     purchaseRequest.Lines.CostingCode = dimension.Dimension1;
                 if (!string.IsNullOrEmpty(dimension?.Dimension2))
-                    purchaseRequest.Lines.CostingCode = dimension.Dimension2;
+                    purchaseRequest.Lines.CostingCode2 = dimension.Dimension2;
                 if (!string.IsNullOrEmpty(dimension?.Dimension3))
-                    purchaseRequest.Lines.CostingCode = dimension.Dimension3;
-                if (!string.IsNullOrEmpty(dimension?.Dimension4))
-                    purchaseRequest.Lines.CostingCode = dimension.Dimension4;
+                    purchaseRequest.Lines.CostingCode3 = dimension.Dimension3;
+                if (!string.IsNullOrEmpty(machine.Line))
+                    purchaseRequest.Lines.CostingCode4 = machine.Line;
                 if (!string.IsNullOrEmpty(dimension?.Dimension5))
-                    purchaseRequest.Lines.CostingCode = dimension.Dimension5;
+                    purchaseRequest.Lines.CostingCode5 = dimension.Dimension5;
 
                 int sapResult = purchaseRequest.Add();
 
@@ -1214,6 +1466,9 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 maintenance.Remark = model.Remark;
                 maintenance.UpdatedBy = model.AccountId;
                 maintenance.UpdatedDate = DateTime.Now;
+
+                if(model.Status == 1)
+                    maintenance.StartMaintenanceDate = DateTime.Now;
 
                 if(model.Status == 2)
                 {
@@ -1369,6 +1624,174 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
             catch
             {
                 await transaction.RollbackAsync();
+                throw;
+            }
+        }
+
+        public async Task UpdateCompleteStatusMaintenance()
+        {
+            try
+            {
+
+                string query = "B1CS_GET_MAINTENANCE_COMPLETE";
+
+                var dataRows = _dataContext.ExecuteStoredProcedureRawMultiple(query, DataContextSql.SqlDbTarget.Default);
+
+                var maintenanceEmergency = dataRows[0].Select(p => new MaintenanceCompleteViewModel
+                {
+                    DocNo = p.GetString("DocNo"),
+                    IsCreatedGI = p.GetString("IsCreatedGI"),
+                    IsCreatedItemRequest = p.GetString("IsCreatedItemRequest"),
+                })
+                .Where((m) => m.DocNo != null)
+                .ToList();
+
+                var maintenancePeriodic = dataRows[1].Select(p => new MaintenanceCompleteViewModel
+                {
+                    DocNo = p.GetString("DocNo"),
+                    IsCreatedGI = p.GetString("IsCreatedGI"),
+                    IsCreatedItemRequest = p.GetString("IsCreatedItemRequest"),
+                })
+                .Where((m) => m.DocNo != null)
+                .ToList();
+
+                foreach ( var m in maintenanceEmergency)
+                {
+                    if(m.IsCreatedItemRequest == "N")
+                        _dataContext.ExecuteNonQuery(@$"UPDATE Maintenances SET Status = 5, EndMaintenanceDate = '{DateTime.Now}' WHERE DocNo = '{m.DocNo}'", SqlDbTarget.Default);
+
+                    if (m.IsCreatedItemRequest == "Y" && m.IsCreatedGI == "Y")
+                        _dataContext.ExecuteNonQuery(@$"UPDATE Maintenances SET Status = 5, EndMaintenanceDate = '{DateTime.Now}' WHERE DocNo = '{m.DocNo}'", SqlDbTarget.Default);
+                }
+
+                foreach (var m in maintenancePeriodic)
+                {
+                    if (m.IsCreatedItemRequest == "N")
+                        _dataContext.ExecuteNonQuery(@$"UPDATE Maintenances SET Status = 5, EndMaintenanceDate = '{DateTime.Now}' WHERE DocNo = '{m.DocNo}'", SqlDbTarget.Default);
+
+                    if (m.IsCreatedItemRequest == "Y" && m.IsCreatedGI == "Y")
+                        _dataContext.ExecuteNonQuery(@$"UPDATE Maintenances SET Status = 5, EndMaintenanceDate = '{DateTime.Now}' WHERE DocNo = '{m.DocNo}'", SqlDbTarget.Default);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task UpdateMaintenanceContinue()
+        {
+            try
+            {
+                string query = "B1CS_GET_MAINTENANCE_CONTINUE";
+
+                var dataRows = _dataContext.ExecuteStoredProcedureRaw(query, DataContextSql.SqlDbTarget.Default);
+
+                var maintenances = dataRows.Select(p => new MaintenanceViewModel
+                {
+                    Id = p.GetLong("Id") ?? 0,
+                    DocNo = p.GetString("DocNo"),
+                    MtnType = p.GetInt("MtnType") ?? 0,
+                    ItemCode = p.GetString("ItemCode"),
+                    ItemName = p.GetString("ItemName"),
+                    FactoryCode = p.GetString("FactoryCode"),
+                    FactoryName = p.GetString("FactoryName"),
+                    DocDate = p.GetDateTime("DocDate") ?? DateTime.MinValue,
+                    DueDate = p.GetDateTime("DueDate") ?? DateTime.MinValue,
+                    PlannedCompletionDate = p.GetDateTime("PlannedCompletionDate") ?? DateTime.MinValue,
+                    RequestUserCode = p.GetString("RequestUserCode"),
+                    RequestUserName = p.GetString("RequestUserName"),
+                    AssignUser = p.GetString("AssignUser"),
+                    AssignUserName = p.GetString("AssignUserName"),
+                    AssignUserDepartment = p.GetString("AssignUserDepartment"),
+                    AssignUserDepartmentDes = p.GetString("AssignUserDepartmentDes"),
+                    ApproveStatus = p.GetInt("ApproveStatus") ?? 0,
+                    RejectedReason = p.GetString("RejectedReason"),
+                    Status = p.GetInt("Status") ?? 0,
+                    Remark = p.GetString("Remark"),
+                    Dscription = p.GetString("Dscription"),
+                    CreatedBy = p.GetString("CreatedBy"),
+                    CreatedDate = p.GetDateTime("CreatedDate") ?? DateTime.MinValue,
+                    MaintCycle = p.GetString("MaintCycle"),
+                    MaintCycleType = p.GetString("MaintCycleType"),
+                    LastMaintDate = p.GetDateTime("LastMaintDate"),
+                    ReminderDays = p.GetInt("ReminderDays"),
+                })
+                .OrderByDescending(m => m.Id)
+                .ToList();
+
+                DateTime currentDate = DateTime.Today;
+                DateTime nextPMDate = currentDate;
+
+                foreach (var item in maintenances)
+                {
+                    int cycle = Convert.ToInt32(item.MaintCycle);
+                    string cycleType = Convert.ToString(item.MaintCycleType ?? "");
+
+                    switch (cycleType?.ToLower())
+                    {
+                        case "day":
+                            nextPMDate = currentDate.AddDays(cycle);
+                            break;
+
+                        case "week":
+                            nextPMDate = currentDate.AddDays(cycle * 7);
+                            break;
+
+                        case "month":
+                            nextPMDate = currentDate.AddMonths(cycle);
+                            break;
+
+                        case "year":
+                            nextPMDate = currentDate.AddYears(cycle);
+                            break;
+
+                        default:
+                            nextPMDate = currentDate;
+                            break;
+                    }
+
+                    if(item.MtnType == 0)
+                    {
+                        _dataContext.ExecuteNonQuery($@"
+                            UPDATE [@MACHINES]
+                            SET
+                                U_LastCMDate = '{currentDate:yyyy-MM-dd}',
+                                U_LastCMPIC = '{item.AssignUser}'
+                            WHERE Code = '{item.ItemCode}'
+                            ", SqlDbTarget.HaiHaCo);
+
+                        _dataContext.ExecuteNonQuery($@"UPDATE Equipments
+                            SET 
+                                LastMaintBy = '{item.AssignUser}',
+                                LastMaintDate = '{currentDate:yyyy-MM-dd}'
+                            WHERE ItemCode = '{item.ItemCode}'", SqlDbTarget.Default);
+                    }
+                    else
+                    {
+                        _dataContext.ExecuteNonQuery($@"
+                            UPDATE [@MACHINES]
+                            SET
+                                U_LastPMDate = '{currentDate:yyyy-MM-dd}',
+                                U_LastPMPIC = '{item.AssignUser}',
+                                U_NextPMDate = '{nextPMDate:yyyy-MM-dd}'
+                            WHERE Code = '{item.ItemCode}'
+                            ", SqlDbTarget.HaiHaCo);
+
+                        _dataContext.ExecuteNonQuery($@"UPDATE Equipments
+                            SET 
+                                IsNoti = 0,
+                                LastMaintBy = '{item.AssignUser}',
+                                LastMaintDate = '{currentDate:yyyy-MM-dd}',
+                                NextMaintDate = '{nextPMDate:yyyy-MM-dd}'
+                            WHERE ItemCode = '{item.ItemCode}'", SqlDbTarget.Default);
+                    }
+
+                    _dataContext.ExecuteNonQuery($@"UPDATE Maintenances SET IsContinue = 'Y' WHERE ItemCode = '{item.ItemCode}'", SqlDbTarget.Default);
+                }
+            }
+            catch
+            {
                 throw;
             }
         }

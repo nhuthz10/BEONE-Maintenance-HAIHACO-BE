@@ -16,6 +16,8 @@ D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\H
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\Hangfire.SqlServer.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\linq2db.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\linq2db.EntityFrameworkCore.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\Magick.NET-Q16-AnyCPU.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\Magick.NET.Core.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -88,6 +90,14 @@ D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\r
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\tr\Microsoft.Data.SqlClient.resources.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\zh-Hans\Microsoft.Data.SqlClient.resources.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\runtimes\linux-arm64\native\Magick.Native-Q16-arm64.dll.so
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\runtimes\linux-musl-x64\native\Magick.Native-Q16-x64.dll.so
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\runtimes\linux-x64\native\Magick.Native-Q16-x64.dll.so
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\runtimes\osx-arm64\native\Magick.Native-Q16-arm64.dll.dylib
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\runtimes\osx-x64\native\Magick.Native-Q16-x64.dll.dylib
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\runtimes\win-arm64\native\Magick.Native-Q16-arm64.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\runtimes\win-x64\native\Magick.Native-Q16-x64.dll
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\runtimes\win-x86\native\Magick.Native-Q16-x86.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll

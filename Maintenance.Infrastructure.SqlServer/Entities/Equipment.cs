@@ -20,6 +20,7 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         public string? FactoryCode { get; set; }
         public string? FactoryName { get; set; }
         public string? Line { get; set; }
+        public string? LineName { get; set; }
         public string? Area { get; set; }
         public string? Section { get; set; }
         public string? SubCSection { get; set; }
@@ -43,6 +44,8 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         public string UpdatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }
         public int? ReminderDays { get; set; }
+        public string? DefaultWhsPR { get; set; }
+        public string? DefaultWhsGI { get; set; }
         public int? IsNoti { get; set; }
         public ICollection<EquipmentCheckLists>? CheckLists { get; set; }
         public ICollection<EquipmentSpareParts>? SpareParts { get; set; }

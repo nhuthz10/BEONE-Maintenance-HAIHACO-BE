@@ -38,11 +38,15 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         public int Status { get; set; }
         public string? Remark { get; set; }
         public string? Dscription { get; set; }
+        public string? DefaultWhsPR { get; set; }
+        public string? DefaultWhsGI { get; set; }
+        public string? IsContinue { get; set; }
+        public DateTime? StartMaintenanceDate { get; set; }
+        public DateTime? EndMaintenanceDate { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }
-
         public ICollection<MaintenanceDocs>? MaintenanceDocs { get; set; }
         public ICollection<MaintenenceAttachments>? MaintenenceAttachments { get; set; }
         public ICollection<MaintenenceCheckLists>? MaintenenceCheckLists { get; set; }

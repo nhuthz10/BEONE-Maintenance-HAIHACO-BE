@@ -15,6 +15,7 @@ namespace Maintenance.Entities.Equipment
         public string? FactoryCode { get; set; }
         public string? FactoryName { get; set; }
         public string? Line { get; set; }
+        public string? LineName { get; set; }
         public string? Area { get; set; }
         public string? Section { get; set; }
         public string? SubCSection { get; set; }
@@ -35,6 +36,8 @@ namespace Maintenance.Entities.Equipment
         public int? IsNoti { get; set; }
         public string IsActive { get; set; }
         public int? ReminderDays { get; set; }
+        public string? DefaultWhsPR { get; set; }
+        public string? DefaultWhsGI { get; set; }
         public List<EquipmentCheckListViewModel>? CheckLists { get; set; }
         public List<EquipmentSparePartViewModel>? SpareParts { get; set; }
     }

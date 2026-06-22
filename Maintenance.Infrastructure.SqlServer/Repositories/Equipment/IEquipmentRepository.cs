@@ -11,6 +11,7 @@ namespace Equipment.Infrastructure.SqlServer.Repositories.Equipment
     public interface IEquipmentRepository
     {
         public Task<OperationResult<List<EquipmentViewModel>>> GetAllEquipment();
-        public Task<OperationResult<List<EquipmentViewModel>>> GetAllSparePart();
+        public Task<OperationResult<List<EquipmentViewModel>>> GetAllSparePart(int id);
+        public Task<OperationResult<List<LineViewModel>>> GetAllLine();
     }
 }

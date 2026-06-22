@@ -11,6 +11,7 @@ namespace Maintenance.UseCase.EquipmentUseCase
     public interface IEquipmentService
     {
         public Task<OperationResult<List<EquipmentViewModel>>> GetAllEquipment();
-        public Task<OperationResult<List<EquipmentViewModel>>> GetAllSparePart();
+        public Task<OperationResult<List<EquipmentViewModel>>> GetAllSparePart(int id);
+        public Task<OperationResult<List<LineViewModel>>> GetAllLine();
     }
 }

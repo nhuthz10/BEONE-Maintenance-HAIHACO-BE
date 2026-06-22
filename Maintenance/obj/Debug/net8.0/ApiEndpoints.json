@@ -101,12 +101,28 @@
   },
   {
     "ContainingType": "Maintenance.Controllers.EquipmentController",
+    "Method": "GetAllLine",
+    "RelativePath": "api/b1cs/v1/equipment/getAllLine",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.EquipmentController",
     "Method": "GetAllSparePart",
     "RelativePath": "api/b1cs/v1/equipment/getAllSparePart",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -117,6 +133,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "CreateGoodReceipt",
+    "RelativePath": "api/b1cs/v1/maintenance/createGoodReceipt",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Maintenance.Dto.Maintenance.CreateGoodReceiptDto",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -249,6 +281,22 @@
     "ContainingType": "Maintenance.Controllers.MaintenanceController",
     "Method": "GetMaintenance",
     "RelativePath": "api/b1cs/v1/maintenance/getMaintenance",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "GetTrackingPrMaintenance",
+    "RelativePath": "api/b1cs/v1/maintenance/getTrackingPrMaintenance",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

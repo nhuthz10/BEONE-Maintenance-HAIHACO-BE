@@ -20,6 +20,10 @@ namespace Maintenance.MapperProfile
             .ForMember(dest => dest.Dimension3, opt => opt.MapFrom(row => row["Dimension3"]))
             .ForMember(dest => dest.Dimension4, opt => opt.MapFrom(row => row["Dimension4"]))
             .ForMember(dest => dest.Dimension5, opt => opt.MapFrom(row => row["Dimension5"]));
+
+            CreateMap<DataRow, AccountViewModel>()
+            .ForMember(dest => dest.AccountCode, opt => opt.MapFrom(row => row["AccountCode"]))
+            .ForMember(dest => dest.Reason, opt => opt.MapFrom(row => row["Reason"]));
         }
     }
 }

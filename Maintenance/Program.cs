@@ -184,7 +184,7 @@ app.UseMiddleware<CustomAuthorizationMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseMiddleware<VersionValidationMiddleware>();
+//app.UseMiddleware<VersionValidationMiddleware>();
 //app.UseMiddleware<DeviceValidationMiddleware>();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -202,6 +202,8 @@ using (var scope = scopeFactory.CreateScope())
     syncDataJob.CreateSyncDataUserJob();
     syncDataJob.CreateMaintenancePeriodicJob();
     syncDataJob.CreateMaintenanceJob();
+    syncDataJob.CreateUpdateMaintenanceCompleteJob();
+    syncDataJob.CreateMaintenanceContinueJob();
 }
 
 app.UseHangfireDashboard("/job-dashboard", new DashboardOptions

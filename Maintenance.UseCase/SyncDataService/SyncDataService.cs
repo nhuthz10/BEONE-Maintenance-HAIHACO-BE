@@ -80,6 +80,30 @@ namespace Maintenance.UseCase.SyncDataService
                  "*/5 * * * *", options: options);
         }
 
+        public void CreateUpdateMaintenanceCompleteJob()
+        {
+            TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            var options = new RecurringJobOptions
+            {
+                TimeZone = timeZone
+            };
+            RecurringJob.AddOrUpdate("udpate-maintenance-complete",
+                methodCall: () => CreateUpdateMaintenanceComplete(),
+                 "*/2 * * * *", options: options);
+        }
+
+        public void CreateMaintenanceContinueJob()
+        {
+            TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            var options = new RecurringJobOptions
+            {
+                TimeZone = timeZone
+            };
+            RecurringJob.AddOrUpdate("update-maintenance-continue",
+                methodCall: () => CreateMaintenanceContinue(),
+                 "*/5 * * * *", options: options);
+        }
+
         public async Task SyncDataUser()
         {
             try
@@ -97,6 +121,30 @@ namespace Maintenance.UseCase.SyncDataService
             try
             {
                 await _maintenanceRepository.CreateMaintenancePeriodic();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task CreateUpdateMaintenanceComplete()
+        {
+            try
+            {
+                await _maintenanceRepository.UpdateCompleteStatusMaintenance();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task CreateMaintenanceContinue()
+        {
+            try
+            {
+                await _maintenanceRepository.UpdateMaintenanceContinue();
             }
             catch
             {

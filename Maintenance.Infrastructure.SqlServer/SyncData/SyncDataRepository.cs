@@ -128,9 +128,12 @@ namespace Maintenance.Infrastructure.SqlServer.SyncData
                         Factory = d["Factory"] == DBNull.Value ? null : Convert.ToString(d["Factory"]),
                         FactoryName = d["FactoryName"] == DBNull.Value ? null : Convert.ToString(d["FactoryName"]),
                         Line = d["Line"] == DBNull.Value ? null : Convert.ToString(d["Line"]),
+                        LineName = d["LineName"] == DBNull.Value ? null : Convert.ToString(d["LineName"]),
                         LastPMDate = d["LastPMDate"] == DBNull.Value ? null : Convert.ToDateTime(d["LastPMDate"]),
                         LastPMPIC = d["LastPMPIC"] == DBNull.Value ? null : Convert.ToString(d["LastPMPIC"]),
                         NextPMDate = d["NextPMDate"] == DBNull.Value ? null : Convert.ToDateTime(d["NextPMDate"]),
+                        DefaultWhsGI = d["DefaultWhsGI"] == DBNull.Value ? null : Convert.ToString(d["DefaultWhsGI"]),
+                        DefaultWhsPR = d["DefaultWhsPR"] == DBNull.Value ? null : Convert.ToString(d["DefaultWhsPR"]),
                     };
                 })
                 .ToList();
@@ -377,9 +380,12 @@ namespace Maintenance.Infrastructure.SqlServer.SyncData
                 table.Columns.Add("Factory", typeof(string));
                 table.Columns.Add("FactoryName", typeof(string));
                 table.Columns.Add("Line", typeof(string));
+                table.Columns.Add("LineName", typeof(string));
                 table.Columns.Add("LastPMDate", typeof(DateTime));
                 table.Columns.Add("LastPMPIC", typeof(string));
                 table.Columns.Add("NextPMDate", typeof(DateTime));
+                table.Columns.Add("DefaultWhsPR", typeof(string));
+                table.Columns.Add("DefaultWhsGI", typeof(string));
 
                 System.Data.DataTable tableCheckList = new System.Data.DataTable();
                 tableCheckList.Columns.Add("Code", typeof(string));
@@ -426,9 +432,12 @@ namespace Maintenance.Infrastructure.SqlServer.SyncData
                         machine.Factory,
                         machine.FactoryName,
                         machine.Line,
+                        machine.LineName,
                         machine.LastPMDate,
                         machine.LastPMPIC,
-                        machine.NextPMDate
+                        machine.NextPMDate,
+                        machine.DefaultWhsPR,
+                        machine.DefaultWhsGI
                     );
                 }
 

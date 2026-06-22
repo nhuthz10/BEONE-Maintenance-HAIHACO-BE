@@ -28,8 +28,11 @@ namespace Maintenance.Entities.SyncData
         public string? Factory { get; set; }
         public string? FactoryName { get; set; }
         public string? Line { get; set; }
+        public string? LineName { get; set; }
         public DateTime? LastPMDate { get; set; }
         public string? LastPMPIC { get; set; }
         public DateTime? NextPMDate { get; set; }
+        public string? DefaultWhsPR { get; set; }
+        public string? DefaultWhsGI { get; set; }
     }
 }

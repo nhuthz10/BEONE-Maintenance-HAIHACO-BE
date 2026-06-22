@@ -1,12 +1,24 @@
 {
   "Files": [
     {
+      "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\10\\37c707ac64d1434793f181290fe4becf.jpg",
+      "PackagePath": "staticwebassets\\Upload\\Maintenance\\10\\37c707ac64d1434793f181290fe4becf.jpg"
+    },
+    {
       "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\13\\7cd179cf5de8403c91b891775bad1152.jpg",
       "PackagePath": "staticwebassets\\Upload\\Maintenance\\13\\7cd179cf5de8403c91b891775bad1152.jpg"
     },
     {
       "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\13\\db84e885250f401c99c5251b32bccbfb.jpg",
       "PackagePath": "staticwebassets\\Upload\\Maintenance\\13\\db84e885250f401c99c5251b32bccbfb.jpg"
+    },
+    {
+      "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\18\\66cbdfa2a0374292a80517ed0461cba2.jpg",
+      "PackagePath": "staticwebassets\\Upload\\Maintenance\\18\\66cbdfa2a0374292a80517ed0461cba2.jpg"
+    },
+    {
+      "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\19\\9fc0ac8dbde4442d8acf0971084bc6e6.png",
+      "PackagePath": "staticwebassets\\Upload\\Maintenance\\19\\9fc0ac8dbde4442d8acf0971084bc6e6.png"
     },
     {
       "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\1\\848c8811db164d7d80dd71cef7331dca.png",
@@ -27,6 +39,10 @@
     {
       "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\7\\eb29bfb8e7424d8fb9381eff61faa4b9.png",
       "PackagePath": "staticwebassets\\Upload\\Maintenance\\7\\eb29bfb8e7424d8fb9381eff61faa4b9.png"
+    },
+    {
+      "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\8\\5782b69618d5406aa47a7449a343af20.jpg",
+      "PackagePath": "staticwebassets\\Upload\\Maintenance\\8\\5782b69618d5406aa47a7449a343af20.jpg"
     },
     {
       "Id": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\8\\bda75d9e63974ab4a4b42e51a29790b4.png",

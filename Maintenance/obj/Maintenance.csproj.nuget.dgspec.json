@@ -149,6 +149,10 @@
               "target": "Package",
               "version": "[1.8.23, )"
             },
+            "Magick.NET-Q16-AnyCPU": {
+              "target": "Package",
+              "version": "[14.14.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.27, )"

@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using Equipment.Infrastructure.SqlServer.Repositories.Equipment;
 using Maintenance.Entities.Equipment;
+using Maintenance.Entities.Maintenance;
 using Maintenance.Entities.Responses;
 using Maintenance.Infrastructure.SqlServer.Common;
 using Maintenance.Infrastructure.SqlServer.Data;
 using Maintenance.Infrastructure.SqlServer.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -52,6 +55,7 @@ namespace Equipment.Infrastructure.SqlServer.Repositories.Equipment
                     FactoryCode = p.GetString("FactoryCode"),
                     FactoryName = p.GetString("FactoryName"),
                     Line = p.GetString("Line"),
+                    LineName = p.GetString("LineName"),
                     Area = p.GetString("Area"),
                     Section = p.GetString("Section"),
                     SubCSection = p.GetString("SubCSection"),
@@ -70,6 +74,8 @@ namespace Equipment.Infrastructure.SqlServer.Repositories.Equipment
                     LastMaintDate = p.GetDateTime("LastMaintDate"),
                     NextMaintDate = p.GetDateTime("NextMaintDate"),
                     ReminderDays = p.GetInt("ReminderDays"),
+                    DefaultWhsPR = p.GetString("DefaultWhsPR"),
+                    DefaultWhsGI = p.GetString("DefaultWhsGI"),
                     IsNoti = p.GetInt("IsNoti"),
                     IsActive = p.GetString("IsActive"),
                 })
@@ -130,14 +136,26 @@ namespace Equipment.Infrastructure.SqlServer.Repositories.Equipment
             }
         }
 
-        public async Task<OperationResult<List<EquipmentViewModel>>> GetAllSparePart()
+        public async Task<OperationResult<List<EquipmentViewModel>>> GetAllSparePart(int id)
         {
             try
             {
+                var maintenance = await _context.Maintenances.FirstOrDefaultAsync(m => m.Id == id);
+
+                if (maintenance == null)
+                    return OperationResult<List<EquipmentViewModel>>.Fail(ErrorCode.NotFound, "Can not find maintenance");
+
                 string query = "B1CS_GET_ALL_SPAREPART";
 
-                var dataRows = _dataContext.ExecuteStoredProcedureRawMultiple(query, DataContextSql.SqlDbTarget.Default);
+                var parameters = new[]
+                {
+                    new SqlParameter("@WhsCode", SqlDbType.NVarChar)
+                    {
+                        Value = maintenance.DefaultWhsGI
+                    },
+                };
 
+                var dataRows = _dataContext.ExecuteStoredProcedureRawMultiple(query, DataContextSql.SqlDbTarget.Default, parameters);
 
                 var headers = dataRows[0]
                 .Select(p => new EquipmentViewModel
@@ -149,10 +167,11 @@ namespace Equipment.Infrastructure.SqlServer.Repositories.Equipment
                     FactoryCode = p.GetString("FactoryCode"),
                     FactoryName = p.GetString("FactoryName"),
                     Line = p.GetString("Line"),
+                    LineName = p.GetString("LineName"),
                     Area = p.GetString("Area"),
                     Section = p.GetString("Section"),
                     SubCSection = p.GetString("SubCSection"),
-                    Onhand = p.GetDouble("Onhand"),
+                    Onhand = p.GetDouble("WhsOnHand"),
                     Manufacturer = p.GetString("Manufacturer"),
                     Origin = p.GetString("Origin"),
                     Model = p.GetString("Model"),
@@ -219,6 +238,30 @@ namespace Equipment.Infrastructure.SqlServer.Repositories.Equipment
                 }
 
                 return OperationResult<List<EquipmentViewModel>>.Success(message: "Get all spare part successfully", data: headers);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<OperationResult<List<LineViewModel>>> GetAllLine()
+        {
+            try
+            {
+                string query = "B1CS_GET_ALL_LINE";
+
+                var dataRows = _dataContext.ExecuteStoredProcedureRawMultiple(query, DataContextSql.SqlDbTarget.Default);
+
+                var result = dataRows[0]
+                    .Select(p => new LineViewModel
+                    {
+                        Code = p.GetString("Code"),
+                        Name = p.GetString("Name"),
+                    })
+                    .ToList();
+
+                return OperationResult<List<LineViewModel>>.Success(message: "Get all line successfully", data: result);
             }
             catch (Exception ex)
             {

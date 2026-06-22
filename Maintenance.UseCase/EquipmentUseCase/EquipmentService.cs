@@ -32,11 +32,24 @@ namespace Maintenance.UseCase.EquipmentUseCase
             }
         }
 
-        public async Task<OperationResult<List<EquipmentViewModel>>> GetAllSparePart()
+        public async Task<OperationResult<List<EquipmentViewModel>>> GetAllSparePart(int id)
         {
             try
             {
-                var result = await _equipmentRepository.GetAllSparePart();
+                var result = await _equipmentRepository.GetAllSparePart(id);
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<OperationResult<List<LineViewModel>>> GetAllLine()
+        {
+            try
+            {
+                var result = await _equipmentRepository.GetAllLine();
                 return result;
             }
             catch
