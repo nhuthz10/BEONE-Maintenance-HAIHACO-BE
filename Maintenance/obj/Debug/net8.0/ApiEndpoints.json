@@ -355,5 +355,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.NotificationController",
+    "Method": "CreateOrUpdateDeviceToken",
+    "RelativePath": "api/b1cs/v1/notification/createOrUpdateDeviceToken",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Maintenance.Dto.Notification.CreateOrUpdateDeviceTokenDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

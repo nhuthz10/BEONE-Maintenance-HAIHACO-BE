@@ -92,6 +92,8 @@ namespace Equipment.Infrastructure.SqlServer.Repositories.Equipment
                         EvaluationStandard = p.GetString("EvaluationStandard"),
                         PassStatus = p.GetString("PassStatus"),
                         Remark = p.GetString("Remark"),
+                        Situation = p.GetString("Situation"),
+                        Solution = p.GetString("Solution"),
                         IsActive = p.GetString("IsActive"),
                     }
                 }).ToList();

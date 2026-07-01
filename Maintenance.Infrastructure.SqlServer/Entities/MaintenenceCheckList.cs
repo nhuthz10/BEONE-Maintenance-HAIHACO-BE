@@ -26,6 +26,8 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         public string? DataType { get; set; }
         public string? CheckResult { get; set; }
         public string? EquipmentStatus { get; set; }
+        public string? Situation { get; set; }
+        public string? Solution { get; set; }
         public string? Remark { get; set; }
     }
 }

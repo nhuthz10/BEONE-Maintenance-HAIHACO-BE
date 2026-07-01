@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "a1bbQuVw7F5I7aZx8u1e+XR2wBSt/a5Qsz2Xf8JFWmI=",
+  "Hash": "+YMl2JcQUf7z3LW6axJY9s/Aa5ucrQaBv0LyP/d0qVQ=",
   "Source": "Maintenance",
   "BasePath": "_content/Maintenance",
   "Mode": "Default",
@@ -1275,6 +1275,90 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Upload\\Maintenance\\10\\37c707ac64d1434793f181290fe4becf.jpg"
+    },
+    {
+      "Identity": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\105\\91b0f387868e43029b684118798a1e01.png",
+      "SourceId": "Maintenance",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\",
+      "BasePath": "_content/Maintenance",
+      "RelativePath": "Upload/Maintenance/105/91b0f387868e43029b684118798a1e01#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "xwvl9h6sug",
+      "Integrity": "L35NGO9xYqOGhzYjlW//lGFT7MHi5KCM1eNEY6pJFWU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\Maintenance\\105\\91b0f387868e43029b684118798a1e01.png"
+    },
+    {
+      "Identity": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\105\\d1fad9e187a34a71ad02153b06154ca8.png",
+      "SourceId": "Maintenance",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\",
+      "BasePath": "_content/Maintenance",
+      "RelativePath": "Upload/Maintenance/105/d1fad9e187a34a71ad02153b06154ca8#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "colpwupyx2",
+      "Integrity": "/KGbK1DdT+oaDjC1ypq6/orrOfbViatnO4EPPavE43w=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\Maintenance\\105\\d1fad9e187a34a71ad02153b06154ca8.png"
+    },
+    {
+      "Identity": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\105\\eca2301e348a483bb08e7154250865e2.png",
+      "SourceId": "Maintenance",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\",
+      "BasePath": "_content/Maintenance",
+      "RelativePath": "Upload/Maintenance/105/eca2301e348a483bb08e7154250865e2#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "r0auasobsx",
+      "Integrity": "xfeZo7T3unDiBUnvowa9d4PheM1hiJ23ikZhGg2YF1Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\Maintenance\\105\\eca2301e348a483bb08e7154250865e2.png"
+    },
+    {
+      "Identity": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\122\\e012ac0c304347a591a2705fd79d017e.png",
+      "SourceId": "Maintenance",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\",
+      "BasePath": "_content/Maintenance",
+      "RelativePath": "Upload/Maintenance/122/e012ac0c304347a591a2705fd79d017e#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "v01lmaln76",
+      "Integrity": "kbk/my0rEar76slcYkq1B7Qa1+ugIBZi8F2Uc/NlCqs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Upload\\Maintenance\\122\\e012ac0c304347a591a2705fd79d017e.png"
     },
     {
       "Identity": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\13\\7cd179cf5de8403c91b891775bad1152.jpg",
@@ -6426,6 +6510,334 @@
         {
           "Name": "integrity",
           "Value": "sha256-X4TKXjn0JoOtQSiLSOBfyHW1Mfeva2l/gddGc//j06E="
+        }
+      ]
+    },
+    {
+      "Route": "Upload/Maintenance/105/91b0f387868e43029b684118798a1e01.png",
+      "AssetFile": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\105\\91b0f387868e43029b684118798a1e01.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "702109"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"L35NGO9xYqOGhzYjlW//lGFT7MHi5KCM1eNEY6pJFWU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 27 Jun 2026 06:47:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-L35NGO9xYqOGhzYjlW//lGFT7MHi5KCM1eNEY6pJFWU="
+        }
+      ]
+    },
+    {
+      "Route": "Upload/Maintenance/105/91b0f387868e43029b684118798a1e01.xwvl9h6sug.png",
+      "AssetFile": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\105\\91b0f387868e43029b684118798a1e01.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "702109"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"L35NGO9xYqOGhzYjlW//lGFT7MHi5KCM1eNEY6pJFWU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 27 Jun 2026 06:47:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xwvl9h6sug"
+        },
+        {
+          "Name": "label",
+          "Value": "Upload/Maintenance/105/91b0f387868e43029b684118798a1e01.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-L35NGO9xYqOGhzYjlW//lGFT7MHi5KCM1eNEY6pJFWU="
+        }
+      ]
+    },
+    {
+      "Route": "Upload/Maintenance/105/d1fad9e187a34a71ad02153b06154ca8.colpwupyx2.png",
+      "AssetFile": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\105\\d1fad9e187a34a71ad02153b06154ca8.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "289105"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/KGbK1DdT+oaDjC1ypq6/orrOfbViatnO4EPPavE43w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 27 Jun 2026 06:41:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "colpwupyx2"
+        },
+        {
+          "Name": "label",
+          "Value": "Upload/Maintenance/105/d1fad9e187a34a71ad02153b06154ca8.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/KGbK1DdT+oaDjC1ypq6/orrOfbViatnO4EPPavE43w="
+        }
+      ]
+    },
+    {
+      "Route": "Upload/Maintenance/105/d1fad9e187a34a71ad02153b06154ca8.png",
+      "AssetFile": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\105\\d1fad9e187a34a71ad02153b06154ca8.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "289105"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/KGbK1DdT+oaDjC1ypq6/orrOfbViatnO4EPPavE43w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 27 Jun 2026 06:41:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/KGbK1DdT+oaDjC1ypq6/orrOfbViatnO4EPPavE43w="
+        }
+      ]
+    },
+    {
+      "Route": "Upload/Maintenance/105/eca2301e348a483bb08e7154250865e2.png",
+      "AssetFile": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\105\\eca2301e348a483bb08e7154250865e2.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "176132"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xfeZo7T3unDiBUnvowa9d4PheM1hiJ23ikZhGg2YF1Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 27 Jun 2026 07:11:00 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xfeZo7T3unDiBUnvowa9d4PheM1hiJ23ikZhGg2YF1Q="
+        }
+      ]
+    },
+    {
+      "Route": "Upload/Maintenance/105/eca2301e348a483bb08e7154250865e2.r0auasobsx.png",
+      "AssetFile": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\105\\eca2301e348a483bb08e7154250865e2.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "176132"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xfeZo7T3unDiBUnvowa9d4PheM1hiJ23ikZhGg2YF1Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 27 Jun 2026 07:11:00 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "r0auasobsx"
+        },
+        {
+          "Name": "label",
+          "Value": "Upload/Maintenance/105/eca2301e348a483bb08e7154250865e2.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xfeZo7T3unDiBUnvowa9d4PheM1hiJ23ikZhGg2YF1Q="
+        }
+      ]
+    },
+    {
+      "Route": "Upload/Maintenance/122/e012ac0c304347a591a2705fd79d017e.png",
+      "AssetFile": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\122\\e012ac0c304347a591a2705fd79d017e.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "180917"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kbk/my0rEar76slcYkq1B7Qa1+ugIBZi8F2Uc/NlCqs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 29 Jun 2026 08:33:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kbk/my0rEar76slcYkq1B7Qa1+ugIBZi8F2Uc/NlCqs="
+        }
+      ]
+    },
+    {
+      "Route": "Upload/Maintenance/122/e012ac0c304347a591a2705fd79d017e.v01lmaln76.png",
+      "AssetFile": "D:\\Mobile\\App_Maintenance_HAIHACO\\BE\\Maintenance\\wwwroot\\Upload\\Maintenance\\122\\e012ac0c304347a591a2705fd79d017e.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "180917"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kbk/my0rEar76slcYkq1B7Qa1+ugIBZi8F2Uc/NlCqs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 29 Jun 2026 08:33:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "v01lmaln76"
+        },
+        {
+          "Name": "label",
+          "Value": "Upload/Maintenance/122/e012ac0c304347a591a2705fd79d017e.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kbk/my0rEar76slcYkq1B7Qa1+ugIBZi8F2Uc/NlCqs="
         }
       ]
     },

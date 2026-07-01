@@ -16,6 +16,8 @@ namespace Maintenance.Infrastructure.SqlServer.Data
         {
         }
 
+        public DbSet<UserDevices> UserDevices { get; set; }
+        public DbSet<NotificationLogs> NotificationLogs { get; set; }
         public DbSet<Equipments> Equipments { get; set; }
         public DbSet<EquipmentCheckLists> EquipmentCheckLists { get; set; }
         public DbSet<EquipmentSpareParts> EquipmentSpareParts { get; set; }

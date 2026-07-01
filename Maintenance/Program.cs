@@ -21,6 +21,9 @@ using Maintenance.UseCase.FactoryUseCase;
 using Maintenance.UseCase.SyncDataService;
 using Maintenance.Infrastructure.SqlServer.SyncData;
 using SAPbobsCOM;
+using Maintenance.UseCase.NotificationJobUseCase;
+using Maintenance.UseCase.NotificationUseCase;
+using Maintenance.Infrastructure.SqlServer.Repositories.Notification;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -105,6 +108,7 @@ builder.Services.AddScoped<ISyncDataRepository, SyncDataRepository>();
 builder.Services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
 builder.Services.AddScoped<IEquipmentRepository, EquipmentRepository>();
 builder.Services.AddScoped<IFactoryRepository, FactoryRepository>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
 
 //Add Service UseCase
@@ -113,9 +117,12 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IMaintenanceService, MaintenanceService>();
 builder.Services.AddScoped<IEquipmentService, EquipmentService>();
 builder.Services.AddScoped<IFactoryService, FactoryService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
 
 //Add Service Job
 builder.Services.AddTransient<SyncDataService>();
+builder.Services.AddTransient<NotificationJobService>();
+
 
 builder.Services.AddCors(
     option =>
@@ -204,6 +211,9 @@ using (var scope = scopeFactory.CreateScope())
     syncDataJob.CreateMaintenanceJob();
     syncDataJob.CreateUpdateMaintenanceCompleteJob();
     syncDataJob.CreateMaintenanceContinueJob();
+
+    var notificationJob = scope.ServiceProvider.GetRequiredService<NotificationJobService>();
+    notificationJob.CreateSendNotificationForItemRequestsJob();
 }
 
 app.UseHangfireDashboard("/job-dashboard", new DashboardOptions

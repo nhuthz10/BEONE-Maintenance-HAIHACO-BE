@@ -207,6 +207,8 @@ namespace Maintenance.Infrastructure.SqlServer.SyncData
                         Code = Convert.ToString(d["Code"]),
                         Task = d["Task"] == DBNull.Value ? null : Convert.ToString(d["Task"]),
                         TaskGroup = d["TaskGroup"] == DBNull.Value ? null : Convert.ToString(d["TaskGroup"]),
+                        Situation = d["Situation"] == DBNull.Value ? null : Convert.ToString(d["Situation"]),
+                        Solution = d["Solution"] == DBNull.Value ? null : Convert.ToString(d["Solution"]),
                         Assignee = d["Assignee"] == DBNull.Value ? null : Convert.ToString(d["Assignee"]),
                         Duration = d["Duration"] == DBNull.Value ? null : Convert.ToInt16(d["Duration"]),
                         Required =  d["Required"] == DBNull.Value ? null : Convert.ToString(d["Required"]),
@@ -392,6 +394,8 @@ namespace Maintenance.Infrastructure.SqlServer.SyncData
                 tableCheckList.Columns.Add("LineId", typeof(int));
                 tableCheckList.Columns.Add("Task", typeof(string));
                 tableCheckList.Columns.Add("TaskGroup", typeof(string));
+                tableCheckList.Columns.Add("Situation", typeof(string));
+                tableCheckList.Columns.Add("Solution", typeof(string));
                 tableCheckList.Columns.Add("Assignee", typeof(string));
                 tableCheckList.Columns.Add("Duration", typeof(int));
                 tableCheckList.Columns.Add("Maintenance", typeof(int));
@@ -448,6 +452,8 @@ namespace Maintenance.Infrastructure.SqlServer.SyncData
                         item.LineId,
                         item.Task,
                         item.TaskGroup,
+                        item.Situation,
+                        item.Solution,
                         item.Assignee,
                         item.Duration,
                         item.Maintenance,

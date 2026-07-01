@@ -1080,6 +1080,78 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Upload\Maintenance\10\37c707ac64d1434793f181290fe4becf.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Upload\Maintenance\105\91b0f387868e43029b684118798a1e01.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Maintenance</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Maintenance</BasePath>
+      <RelativePath>Upload/Maintenance/105/91b0f387868e43029b684118798a1e01.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>xwvl9h6sug</Fingerprint>
+      <Integrity>L35NGO9xYqOGhzYjlW//lGFT7MHi5KCM1eNEY6pJFWU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Upload\Maintenance\105\91b0f387868e43029b684118798a1e01.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Upload\Maintenance\105\d1fad9e187a34a71ad02153b06154ca8.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Maintenance</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Maintenance</BasePath>
+      <RelativePath>Upload/Maintenance/105/d1fad9e187a34a71ad02153b06154ca8.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>colpwupyx2</Fingerprint>
+      <Integrity>/KGbK1DdT+oaDjC1ypq6/orrOfbViatnO4EPPavE43w=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Upload\Maintenance\105\d1fad9e187a34a71ad02153b06154ca8.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Upload\Maintenance\105\eca2301e348a483bb08e7154250865e2.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Maintenance</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Maintenance</BasePath>
+      <RelativePath>Upload/Maintenance/105/eca2301e348a483bb08e7154250865e2.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>r0auasobsx</Fingerprint>
+      <Integrity>xfeZo7T3unDiBUnvowa9d4PheM1hiJ23ikZhGg2YF1Q=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Upload\Maintenance\105\eca2301e348a483bb08e7154250865e2.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Upload\Maintenance\122\e012ac0c304347a591a2705fd79d017e.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Maintenance</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Maintenance</BasePath>
+      <RelativePath>Upload/Maintenance/122/e012ac0c304347a591a2705fd79d017e.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>v01lmaln76</Fingerprint>
+      <Integrity>kbk/my0rEar76slcYkq1B7Qa1+ugIBZi8F2Uc/NlCqs=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Upload\Maintenance\122\e012ac0c304347a591a2705fd79d017e.png'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Upload\Maintenance\13\7cd179cf5de8403c91b891775bad1152.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>Maintenance</SourceId>

@@ -40,6 +40,7 @@ namespace Maintenance.Entities.Maintenance
         public string? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public string? IsCreatedGI { get; set; }
+        public int? DocNoGIDraft { get; set; }
 
         public List<MaintenanceDocViewModel>? MaintenanceDocs { get; set; }
         public List<MaintenenceAttachmentViewModel>? MaintenenceAttachments { get; set; }
@@ -81,6 +82,8 @@ namespace Maintenance.Entities.Maintenance
         public string? CheckItem { get; set; }
         public string? EvaluationStandard { get; set; }
         public string? DataType { get; set; }
+        public string? Situation { get; set; }
+        public string? Solution { get; set; }
         public string? CheckResult { get; set; }
         public string? EquipmentStatus { get; set; }
         public string? Remark { get; set; }

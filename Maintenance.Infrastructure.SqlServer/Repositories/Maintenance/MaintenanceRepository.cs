@@ -472,6 +472,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                         Dscription = p.GetString("Dscription"),
                         CreatedBy = p.GetString("CreatedBy"),
                         IsCreatedGI = p.GetString("IsCreatedGI"),
+                        DocNoGIDraft = p.GetInt("DocNoGIDraft"),
                         CreatedDate = p.GetDateTime("CreatedDate") ?? DateTime.MinValue
                     })
                     .FirstOrDefault();
@@ -525,6 +526,8 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                     CheckItem = p.GetString("CheckItem"),
                     EvaluationStandard = p.GetString("EvaluationStandard"),
                     DataType = p.GetString("DataType"),
+                    Situation = p.GetString("Situation"),
+                    Solution = p.GetString("Solution"),
                     CheckResult = p.GetString("CheckResult"),
                     EquipmentStatus = p.GetString("EquipmentStatus"),
                     Remark = p.GetString("Remark")
@@ -843,6 +846,8 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                                 JobType = x.JobType,
                                 CheckItem = x.CheckItem,
                                 EvaluationStandard = x.EvaluationStandard,
+                                Situation = x.Situation,
+                                Solution = x.Solution,
                                 Remark = x.Remark,
                             })
                             .ToList();
@@ -1590,6 +1595,8 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                         DataType = null,
                         CheckResult = model.CheckResult,
                         EquipmentStatus = model.EquipmentStatus,
+                        Situation = model.Situation,
+                        Solution = model.Solution,
                         Remark = model.Remark
                     };
 
@@ -1612,6 +1619,8 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                     entity.EvaluationStandard = model.EvaluationStandard;
                     entity.CheckResult = model.CheckResult;
                     entity.EquipmentStatus = model.EquipmentStatus;
+                    entity.Situation = model.Situation;
+                    entity.Solution = model.Solution;
                     entity.Remark = model.Remark;
                 }
 

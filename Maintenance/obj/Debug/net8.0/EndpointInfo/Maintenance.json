@@ -582,6 +582,37 @@
           }
         }
       }
+    },
+    "/api/b1cs/v1/notification/createOrUpdateDeviceToken": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateDeviceTokenDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateDeviceTokenDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateDeviceTokenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -653,6 +684,24 @@
           "file": {
             "type": "string",
             "format": "binary",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateOrUpdateDeviceTokenDto": {
+        "type": "object",
+        "properties": {
+          "deviceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "platform": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -830,6 +879,14 @@
             "nullable": true
           },
           "remark": {
+            "type": "string",
+            "nullable": true
+          },
+          "situation": {
+            "type": "string",
+            "nullable": true
+          },
+          "solution": {
             "type": "string",
             "nullable": true
           }

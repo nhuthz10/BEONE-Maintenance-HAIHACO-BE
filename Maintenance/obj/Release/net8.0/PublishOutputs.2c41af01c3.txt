@@ -1,6 +1,7 @@
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\Maintenance.exe
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\appsettings.json
+D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\service-account.json
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\Maintenance.dll
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\Maintenance.runtimeconfig.json
 D:\Mobile\App_Maintenance_HAIHACO\BE\Maintenance\obj\Release\net8.0\PubTmp\Out\Maintenance.pdb

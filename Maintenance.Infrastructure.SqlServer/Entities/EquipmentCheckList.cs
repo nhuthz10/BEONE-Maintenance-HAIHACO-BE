@@ -22,6 +22,8 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         public int? LineId { get; set; }
         public string? JobType { get; set; }
         public string? CheckItem { get; set; }
+        public string? Situation { get; set; }
+        public string? Solution { get; set; }
         public string? EvaluationStandard { get; set; }
         public string PassStatus { get; set; }
         public string? Remark { get; set; }

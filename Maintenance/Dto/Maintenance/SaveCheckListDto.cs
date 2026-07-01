@@ -11,5 +11,7 @@
         public string? CheckResult { get; set; }
         public string? EquipmentStatus { get; set; }
         public string? Remark { get; set; }
+        public string? Situation { get; set; }
+        public string? Solution { get; set; }
     }
 }
