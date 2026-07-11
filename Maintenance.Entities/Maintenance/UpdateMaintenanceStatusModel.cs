@@ -12,6 +12,7 @@ namespace Maintenance.Entities.Maintenance
         public int Id { get; set; }
         public int Status { get; set; }
         public string? Remark { get; set; }
+        public DateTime? MachineRestartTime { get; set; }
         public List<CreateMaintenenceAttachmentModel>? Attachments { get; set; }
     }
 }

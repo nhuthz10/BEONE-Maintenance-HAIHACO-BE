@@ -191,5 +191,76 @@ namespace Maintenance.UseCase.NotificationUseCase
                 throw;
             }
         }
+
+        public async Task SendNotificationForPurchaseRequestsAsync()
+        {
+            try
+            {
+                var logs = await _dbContext.NotificationLogs.Where(d => d.RefType == "PurchaseRequest" && d.RetryCount < 3 && (d.Status == 0 || d.Status == 2))
+                    .OrderBy(x => x.CreatedAt)
+                    .Take(100).ToListAsync();
+
+                if (!logs.Any()) return;
+
+                foreach (var log in logs)
+                {
+                    log.Status = -1;
+                }
+
+                await _dbContext.SaveChangesAsync();
+
+                foreach (var log in logs)
+                {
+                    try
+                    {
+                        Dictionary<string, string>?
+                            data = null;
+
+                        if (!string.IsNullOrWhiteSpace(log.DataJson))
+                        {
+                            data = JsonConvert.DeserializeObject<Dictionary<string, string>>(log.DataJson);
+                        }
+
+                        var result = await SendNotificationAsync(log.FcmToken, log.Platform ?? "", log.Title, log.Body, $"/home-technical/maintenance/{log.DocEntry}", data);
+
+                        if (result.Success)
+                        {
+                            log.Status = 1;
+                            log.SentAt = DateTime.Now;
+                            log.ErrorMessage = null;
+                        }
+                        else
+                        {
+                            log.Status = 2;
+                            log.RetryCount++;
+                            log.ErrorMessage = result.Response;
+
+                            if (result.Response.Contains("UNREGISTERED") || result.Response.Contains("INVALID_ARGUMENT") || result.Response.Contains("registration-token-not-registered"))
+                            {
+                                var device = await _dbContext.UserDevices.FirstOrDefaultAsync(x => x.DeviceId == log.DeviceId);
+
+                                if (device != null)
+                                {
+                                    device.IsActive = false;
+                                    device.UpdatedAt = DateTime.Now;
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Status = 2;
+                        log.RetryCount++;
+                        log.ErrorMessage = ex.Message;
+                    }
+                }
+
+                await _dbContext.SaveChangesAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

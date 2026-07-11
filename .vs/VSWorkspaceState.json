@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Maintenance",
     "\\Maintenance.Infrastructure.SqlServer",
+    "\\Maintenance.Infrastructure.SqlServer\\Entities",
     "\\Maintenance.Infrastructure.SqlServer\\Repositories",
     "\\Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance"
   ],
-  "SelectedNode": "\\Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance\\MaintenanceRepository.cs",
+  "SelectedNode": "\\Maintenance.Infrastructure.SqlServer\\Entities\\Maintenance.cs",
   "PreviewInSolutionExplorer": false
 }

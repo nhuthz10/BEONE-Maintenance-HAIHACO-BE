@@ -191,7 +191,7 @@ app.UseMiddleware<CustomAuthorizationMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//app.UseMiddleware<VersionValidationMiddleware>();
+app.UseMiddleware<VersionValidationMiddleware>();
 //app.UseMiddleware<DeviceValidationMiddleware>();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -214,6 +214,7 @@ using (var scope = scopeFactory.CreateScope())
 
     var notificationJob = scope.ServiceProvider.GetRequiredService<NotificationJobService>();
     notificationJob.CreateSendNotificationForItemRequestsJob();
+    notificationJob.CreateSendNotificationForPurchaseRequestsJob();
 }
 
 app.UseHangfireDashboard("/job-dashboard", new DashboardOptions

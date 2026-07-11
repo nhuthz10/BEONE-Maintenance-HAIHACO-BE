@@ -30,11 +30,35 @@ namespace Maintenance.UseCase.NotificationJobUseCase
                  "*/1 * * * *", options: options);
         }
 
+        public void CreateSendNotificationForPurchaseRequestsJob()
+        {
+            TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            var options = new RecurringJobOptions
+            {
+                TimeZone = timeZone
+            };
+            RecurringJob.AddOrUpdate("send-noti-purchase-request",
+                methodCall: () => SendNotificationForPurchaseRequests(),
+                 "*/1 * * * *", options: options);
+        }
+
         public async Task SendNotificationForItemRequests()
         {
             try
             {
                 await _notificationService.SendNotificationForItemRequestsAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task SendNotificationForPurchaseRequests()
+        {
+            try
+            {
+                await _notificationService.SendNotificationForPurchaseRequestsAsync();
             }
             catch
             {

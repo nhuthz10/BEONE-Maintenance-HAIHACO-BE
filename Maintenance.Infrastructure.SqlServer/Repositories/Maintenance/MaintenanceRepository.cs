@@ -491,6 +491,8 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                         CardCode = p.GetString("CardCode"),
                         DocType = p.GetString("DocType"),
                         ObjectType = p.GetInt("ObjectType"),
+                        ApproveStatus = p.GetInt("ApproveStatus"),
+                        RejectedReason = p.GetString("RejectedReason"),
                         Machine = p.GetString("Machine")
                     }
                 }).ToList();
@@ -504,7 +506,8 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                         ItemCode = p.GetString("ItemCode"),
                         Description = p.GetString("Description"),
                         Quantity = p.GetDouble("Quantity"),
-                        UomCode = p.GetString("UomCode")
+                        UomCode = p.GetString("UomCode"),
+                        Stock = p.GetDouble("Stock")
                     }
                 }).ToList();
 
@@ -540,7 +543,9 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                     ItemCode = p.GetString("ItemCode"),
                     ItemName = p.GetString("ItemName"),
                     UomCode = p.GetString("UomCode"),
-                    Quantity = p.GetDouble("Quantity")
+                    Quantity = p.GetDouble("Quantity"),
+                    RequiredTime = p.GetDateTime("RequiredTime"),
+                    Note = p.GetString("Note")
                 })
                 .ToList();
 
@@ -608,6 +613,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 var allItems = dataRows
                     .SelectMany(rows => rows.Select(p => new TrackingPrDetailViewModel
                     {
+                        DocKey = p.GetString("DocKey") ?? "",
                         Type = p.GetString("Type") ?? "",
                         Key = p.GetString("Key") ?? "",
                         Process = p.GetInt("Process") ?? 0,
@@ -616,15 +622,32 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                         User = p.GetString("User"),
                         Department = p.GetString("Department"),
                         Time = p.GetDateTime("Time"),
+                        Step = p.GetInt("Step"),
                     }))
                     .ToList();
 
                 var pr = allItems
-                    .Where(i => i.Type == "PurchaseRequest")
+                    .Where(x => x.Type == "PurchaseRequest")
+                    .GroupBy(x => x.DocKey)
+                    .Select(g => new TrackingPrGroupViewModel
+                    {
+                        DocKey = g.Key,
+                        Details = g
+                            .OrderBy(x => x.Step)    
+                            .ToList()
+                    })
                     .ToList();
 
                 var prService = allItems
-                    .Where(i => i.Type == "PurchaseRequestService")
+                    .Where(x => x.Type == "PurchaseRequestService")
+                    .GroupBy(x => x.DocKey)
+                    .Select(g => new TrackingPrGroupViewModel
+                    {
+                        DocKey = g.Key,
+                        Details = g
+                            .OrderBy(x => x.Step)
+                            .ToList()
+                    })
                     .ToList();
 
                 var result = new TrackingPrViewModel
@@ -665,6 +688,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                     FactoryCode = item.FactoryCode,
                     FactoryName = item.FactoryName,
                     DocDate = model.DocDate,
+                    MachineStopTime = model.MachineStopTime,
                     PlannedCompletionDate = model.PlannedCompletionDate,
                     RequestUserCode = user.UserName,
                     RequestUserName = user.FullName,
@@ -928,7 +952,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 var maintenanceDoc = new MaintenanceDocs
                 {
                     HeaderId = maintenance.Id,
-                    DocNo = Convert.ToInt64(draftDocNum),
+                    DocNo = Convert.ToInt64(draftDocEntry),
                     DocDate = DateTime.Now,
                     DocType = "GoodReceipt",
                     Machine = maintenance.ItemCode,
@@ -947,7 +971,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
-                return OperationResult<string>.Success(message: "Create good receipt successfully", data: draftDocNum.ToString() ?? "");
+                return OperationResult<string>.Success(message: "Create good receipt successfully", data: draftDocEntry.ToString() ?? "");
             }
             catch (Exception ex)
             {
@@ -994,6 +1018,9 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 oDraft.DocObjectCode = SAPbobsCOM.BoObjectTypes.oInventoryGenEntry;
                 oDraft.BPL_IDAssignedToInvoice = 1;
 
+                if (!string.IsNullOrEmpty(machine.Line))
+                    oDraft.UserFields.Fields.Item("U_ProductLine").Value = GetProductLine(machine.Line);
+
                 if (model.Details != null)
                 {
                     int index = 0;
@@ -1013,13 +1040,13 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                         oDraft.Lines.UserFields.Fields.Item("U_Reason").Value = account?.Reason;
                         oDraft.Lines.AccountCode = account?.AccountCode;
 
-                        if (!string.IsNullOrEmpty(dimension?.Dimension1))
-                            oDraft.Lines.CostingCode = dimension.Dimension1;
+                        if (!string.IsNullOrEmpty(machine?.FactoryCode))
+                            oDraft.Lines.CostingCode = machine?.FactoryCode;
                         if (!string.IsNullOrEmpty(dimension?.Dimension2))
                             oDraft.Lines.CostingCode2 = dimension.Dimension2;
                         if (!string.IsNullOrEmpty(dimension?.Dimension3))
                             oDraft.Lines.CostingCode3 = dimension.Dimension3;
-                        if (!string.IsNullOrEmpty(machine.Line))
+                        if (!string.IsNullOrEmpty(machine?.Line))
                             oDraft.Lines.CostingCode4 = machine.Line;
                         if (!string.IsNullOrEmpty(dimension?.Dimension5))
                             oDraft.Lines.CostingCode5 = dimension.Dimension5;
@@ -1150,10 +1177,12 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
 
                 var docEntry = result.GetProperty("DocEntry");
 
+                int? docNum = _dataContext.ExecuteQuery<int?>(@$"SELECT DocNum FROM [@ITEM_REQ] WHERE DocEntry = {docEntry}", SqlDbTarget.HaiHaCo).FirstOrDefault();
+
                 var maintenanceDoc = new MaintenanceDocs
                 {
                     HeaderId = maintenance.Id,
-                    DocNo = Convert.ToInt64(docEntry),
+                    DocNo = Convert.ToInt64(docNum),
                     DocDate = DateTime.Now,
                     DocType = "ItemRequest",
                     Machine = maintenance.ItemCode,
@@ -1163,7 +1192,9 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                         ItemCode = x.ItemCode,
                         Description = x.ItemName,
                         Quantity = x.Quantity,
-                        UomCode = x.UomCode
+                        UomCode = x.UomCode,
+                        Stock = x.Stock
+
                     }).ToList()
                 };
 
@@ -1172,7 +1203,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
-                return OperationResult<string>.Success(message: "Create item request successfully", data: docEntry.ToString() ?? "");
+                return OperationResult<string>.Success(message: "Create item request successfully", data: docNum.ToString() ?? "");
             }
             catch (Exception ex)
             {
@@ -1225,7 +1256,9 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                         ItemCode = x.ItemCode,
                         ItemName = x.ItemName,
                         UomCode = x.UomCode,
-                        Quantity = x.Quantity
+                        Quantity = x.Quantity,
+                        RequiredTime = x.RequiredTime,
+                        Note = x.Note
                     })
                     .ToList();
 
@@ -1262,8 +1295,12 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                     purchaseRequest.Lines.WarehouseCode = maintenance.DefaultWhsPR ?? "";
                     purchaseRequest.Lines.Quantity = item.Quantity ?? 0;
                     purchaseRequest.Lines.UoMEntry = GetUomEntryByUomCode(item.UomCode ?? "");
-                    if (!string.IsNullOrEmpty(dimension?.Dimension1))
-                        purchaseRequest.Lines.CostingCode = dimension.Dimension1;
+                    if (item.RequiredTime.HasValue)
+                        purchaseRequest.Lines.RequiredDate = item.RequiredTime.Value;
+                    if (!string.IsNullOrEmpty(item.Note))
+                        purchaseRequest.Lines.FreeText = item.Note;
+                    if (!string.IsNullOrEmpty(machine.FactoryCode))
+                        purchaseRequest.Lines.CostingCode = machine.FactoryCode;
                     if (!string.IsNullOrEmpty(dimension?.Dimension2))
                         purchaseRequest.Lines.CostingCode2 = dimension.Dimension2;
                     if (!string.IsNullOrEmpty(dimension?.Dimension3))
@@ -1310,7 +1347,9 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                         ItemCode = x.ItemCode,
                         Description = x.ItemName,
                         Quantity = x.Quantity,
-                        UomCode = x.UomCode
+                        UomCode = x.UomCode,
+                        RequiredTime = x.RequiredTime,
+                        Note = x.Note
                     }).ToList()
                 };
 
@@ -1469,6 +1508,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
 
                 maintenance.Status = model.Status;
                 maintenance.Remark = model.Remark;
+                maintenance.MachineRestartTime = model.MachineRestartTime;
                 maintenance.UpdatedBy = model.AccountId;
                 maintenance.UpdatedDate = DateTime.Now;
 
@@ -1818,5 +1858,25 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
 
             return uomEntry;
         }
+
+        public string GetProductLine(string line)
+        {
+            switch (line)
+            {
+                case "GCGBGAO1":
+                    return "GCBOTGAO";
+                case "GCSOCOL1":
+                    return "GCSOCOLA";
+                case "PTROND1":
+                    return "PTROND";
+                case "PTROVSP1":
+                    return "PTROVSIP";
+                case "PTROVT1":
+                    return "PTROVT";
+                default:
+                    return line;
+            }
+        }
+
     }
 }

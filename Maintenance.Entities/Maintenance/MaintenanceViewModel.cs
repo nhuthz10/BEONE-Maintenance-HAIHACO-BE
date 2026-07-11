@@ -41,7 +41,6 @@ namespace Maintenance.Entities.Maintenance
         public DateTime? UpdatedDate { get; set; }
         public string? IsCreatedGI { get; set; }
         public int? DocNoGIDraft { get; set; }
-
         public List<MaintenanceDocViewModel>? MaintenanceDocs { get; set; }
         public List<MaintenenceAttachmentViewModel>? MaintenenceAttachments { get; set; }
         public List<MaintenenceCheckListViewModel>? MaintenenceCheckLists { get; set; }
@@ -56,6 +55,8 @@ namespace Maintenance.Entities.Maintenance
         public string? CardCode { get; set; }
         public string? DocType { get; set; }
         public int? ObjectType { get; set; }
+        public int? ApproveStatus { get; set; }
+        public string? RejectedReason { get; set; }
         public string? Machine { get; set; }
         public List<MaintenanceDocDetailViewModel>? Details { get; set; }
     }
@@ -65,6 +66,7 @@ namespace Maintenance.Entities.Maintenance
         public string? ItemCode { get; set; }
         public string? Description { get; set; }
         public double? Quantity { get; set; }
+        public double? Stock { get; set; }
         public string? UomCode { get; set; }
     }
 
@@ -94,6 +96,9 @@ namespace Maintenance.Entities.Maintenance
         public string? ItemName { get; set; }
         public string? UomCode { get; set; }
         public double? Quantity { get; set; }
+        public double? Stock { get; set; }
+        public DateTime? RequiredTime { get; set; }
+        public string? Note { get; set; }
     }
 
     public class GoodIssueViewModel

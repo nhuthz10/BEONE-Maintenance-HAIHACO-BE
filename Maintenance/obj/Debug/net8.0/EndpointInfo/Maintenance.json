@@ -329,6 +329,10 @@
                     "type": "string",
                     "format": "date-time"
                   },
+                  "MachineStopTime": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
                   "PlannedCompletionDate": {
                     "type": "string",
                     "format": "date-time"
@@ -352,6 +356,9 @@
                   "style": "form"
                 },
                 "DocDate": {
+                  "style": "form"
+                },
+                "MachineStopTime": {
                   "style": "form"
                 },
                 "PlannedCompletionDate": {
@@ -396,6 +403,10 @@
                   "Remark": {
                     "type": "string"
                   },
+                  "MachineRestartTime": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
                   "Attachments": {
                     "type": "array",
                     "items": {
@@ -412,6 +423,9 @@
                   "style": "form"
                 },
                 "Remark": {
+                  "style": "form"
+                },
+                "MachineRestartTime": {
                   "style": "form"
                 },
                 "Attachments": {
@@ -837,6 +851,20 @@
           "quantity": {
             "type": "number",
             "format": "double",
+            "nullable": true
+          },
+          "stock": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "requiredTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
             "nullable": true
           }
         },

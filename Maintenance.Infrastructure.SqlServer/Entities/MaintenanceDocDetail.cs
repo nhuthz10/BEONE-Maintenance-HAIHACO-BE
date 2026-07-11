@@ -24,5 +24,8 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         public string? Description { get; set; }
         public double? Quantity { get; set; }
         public string? UomCode { get; set; }
+        public DateTime? RequiredTime { get; set; }
+        public double? Stock { get; set; }
+        public string? Note { get; set; }
     }
 }

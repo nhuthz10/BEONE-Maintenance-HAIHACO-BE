@@ -47,6 +47,8 @@ namespace Maintenance.Infrastructure.SqlServer.Entities
         public DateTime CreatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public DateTime UpdatedDate { get; set; }
+        public DateTime? MachineStopTime { get; set; }
+        public DateTime? MachineRestartTime { get; set; }
         public ICollection<MaintenanceDocs>? MaintenanceDocs { get; set; }
         public ICollection<MaintenenceAttachments>? MaintenenceAttachments { get; set; }
         public ICollection<MaintenenceCheckLists>? MaintenenceCheckLists { get; set; }

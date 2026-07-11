@@ -12,5 +12,6 @@ namespace Maintenance.UseCase.NotificationUseCase
     {
         public Task<OperationResult<string>> CreateOrUpdateDeviceToken(CreateOrUpdateDeviceTokenModel model);
         public Task SendNotificationForItemRequestsAsync();
+        public Task SendNotificationForPurchaseRequestsAsync();
     }
 }
