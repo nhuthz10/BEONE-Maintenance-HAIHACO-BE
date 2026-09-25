@@ -206,6 +206,36 @@
         "IsRequired": false
       },
       {
+        "Name": "AssignTo.UserCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AssignTo.UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AssignTo.Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AssignTo.Department",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AssignTo.DepartmentDes",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AssignTo.Position",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "Attachments",
         "Type": "System.Collections.Generic.List\u00601[[Maintenance.Dto.Maintenance.CreateMaintenenceAttachmentDto, Maintenance, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
@@ -280,6 +310,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Maintenance.Controllers.MaintenanceController",
+    "Method": "GetAllTechnicalStaff",
+    "RelativePath": "api/b1cs/v1/maintenance/getAllTechnicalStaff",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

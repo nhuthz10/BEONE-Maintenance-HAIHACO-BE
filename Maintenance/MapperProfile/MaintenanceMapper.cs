@@ -18,6 +18,8 @@ namespace Maintenance.MapperProfile
 
             CreateMap<CreateMaintenanceDto, CreateMaintenanceModel>();
 
+            CreateMap<AssignToDto, AssignToViewModel>();
+
             CreateMap<CreateMaintenenceAttachmentDto, CreateMaintenenceAttachmentModel>();
 
             CreateMap<UpdateMaintenanceStatusDto, UpdateMaintenanceStatusModel>();
@@ -45,6 +47,8 @@ namespace Maintenance.MapperProfile
             .ForMember(dest => dest.User, opt => opt.MapFrom(row => row["User"]))
             .ForMember(dest => dest.Department, opt => opt.MapFrom(row => row["Department"]))
             .ForMember(dest => dest.Time, opt => opt.MapFrom(row => row["Time"]));
+
+            
         }
     }
 }

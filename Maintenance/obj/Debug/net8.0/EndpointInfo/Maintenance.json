@@ -340,6 +340,24 @@
                   "Dscription": {
                     "type": "string"
                   },
+                  "AssignTo.UserCode": {
+                    "type": "string"
+                  },
+                  "AssignTo.UserName": {
+                    "type": "string"
+                  },
+                  "AssignTo.Email": {
+                    "type": "string"
+                  },
+                  "AssignTo.Department": {
+                    "type": "string"
+                  },
+                  "AssignTo.DepartmentDes": {
+                    "type": "string"
+                  },
+                  "AssignTo.Position": {
+                    "type": "string"
+                  },
                   "Attachments": {
                     "type": "array",
                     "items": {
@@ -365,6 +383,24 @@
                   "style": "form"
                 },
                 "Dscription": {
+                  "style": "form"
+                },
+                "AssignTo.UserCode": {
+                  "style": "form"
+                },
+                "AssignTo.UserName": {
+                  "style": "form"
+                },
+                "AssignTo.Email": {
+                  "style": "form"
+                },
+                "AssignTo.Department": {
+                  "style": "form"
+                },
+                "AssignTo.DepartmentDes": {
+                  "style": "form"
+                },
+                "AssignTo.Position": {
                   "style": "form"
                 },
                 "Attachments": {
@@ -590,6 +626,18 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/b1cs/v1/maintenance/getAllTechnicalStaff": {
+      "get": {
+        "tags": [
+          "Maintenance"
+        ],
         "responses": {
           "200": {
             "description": "OK"

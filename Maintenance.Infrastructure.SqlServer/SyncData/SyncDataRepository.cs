@@ -205,6 +205,7 @@ namespace Maintenance.Infrastructure.SqlServer.SyncData
                     return new MachineCheckListViewModel
                     {
                         Code = Convert.ToString(d["Code"]),
+                        LineId = d["LineId"] == DBNull.Value ? null : Convert.ToInt32(d["LineId"]),
                         Task = d["Task"] == DBNull.Value ? null : Convert.ToString(d["Task"]),
                         TaskGroup = d["TaskGroup"] == DBNull.Value ? null : Convert.ToString(d["TaskGroup"]),
                         Situation = d["Situation"] == DBNull.Value ? null : Convert.ToString(d["Situation"]),

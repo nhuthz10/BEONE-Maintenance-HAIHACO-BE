@@ -87,6 +87,7 @@ namespace Equipment.Infrastructure.SqlServer.Repositories.Equipment
 
                     ViewModel = new EquipmentCheckListViewModel
                     {
+                        LineId = p.GetInt("LineId"),
                         JobType = p.GetString("JobType"),
                         CheckItem = p.GetString("CheckItem"),
                         EvaluationStandard = p.GetString("EvaluationStandard"),

@@ -1,6 +1,7 @@
 ﻿using Maintenance.Entities.Equipment;
 using Maintenance.Entities.Maintenance;
 using Maintenance.Entities.Responses;
+using Maintenance.Entities.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
         public Task<OperationResult<string>> CreatePurchaseRequest(CreatePurchaseRequestModel model);
         public Task<OperationResult<string>> CreatePurchaseRequestService(CreatePurchaseRequestServiceModel model);
         public Task<OperationResult<string>> SaveCheckList(SaveCheckListModel model);
+        public Task<OperationResult<List<UserViewModel>>> GetAllTechnicalStaff();
         public Task CreateMaintenancePeriodic();
         public Task UpdateCompleteStatusMaintenance();
         public Task UpdateMaintenanceContinue();

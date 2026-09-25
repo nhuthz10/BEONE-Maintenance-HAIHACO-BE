@@ -2,6 +2,7 @@
 using Maintenance.Dto.Maintenance;
 using Maintenance.Entities.Maintenance;
 using Maintenance.Entities.Responses;
+using Maintenance.Entities.User;
 using Maintenance.UseCase.MaintenanceUseCase;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -324,6 +325,27 @@ namespace Maintenance.Controllers
                 }
 
                 return Ok(ResponseApi<string>.Success(result.Data, result.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ResponseApi<string>.Error(ErrorCode.InternalServerError, "Error from the server"));
+            }
+        }
+
+        [Authorize]
+        [HttpGet("getAllTechnicalStaff")]
+        public async Task<IActionResult> GetAllTechnicalStaff()
+        {
+            try
+            {
+                var result = await _maintenanceService.GetAllTechnicalStaff();
+
+                if (!result.IsSuccess)
+                {
+                    return BadRequest(ResponseApi<string>.Error(result.ErrorCode, result.Message));
+                }
+
+                return Ok(ResponseApi<List<UserViewModel>>.Success(result.Data, result.Message));
             }
             catch (Exception ex)
             {

@@ -5,8 +5,11 @@
     "\\Maintenance.Infrastructure.SqlServer",
     "\\Maintenance.Infrastructure.SqlServer\\Entities",
     "\\Maintenance.Infrastructure.SqlServer\\Repositories",
-    "\\Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance"
+    "\\Maintenance.Infrastructure.SqlServer\\Repositories\\Equipment",
+    "\\Maintenance.Infrastructure.SqlServer\\Repositories\\Maintenance",
+    "\\Maintenance.Infrastructure.SqlServer\\SyncData",
+    "\\Maintenance\\Controllers"
   ],
-  "SelectedNode": "\\Maintenance.Infrastructure.SqlServer\\Entities\\Maintenance.cs",
+  "SelectedNode": "\\Maintenance.Infrastructure.SqlServer\\SyncData\\SyncDataRepository.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -3,6 +3,7 @@ using Equipment.Infrastructure.SqlServer.Repositories.Equipment;
 using Maintenance.Entities.Maintenance;
 using Maintenance.Entities.Responses;
 using Maintenance.Entities.Sap;
+using Maintenance.Entities.User;
 using Maintenance.Infrastructure.SqlServer.Common;
 using Maintenance.Infrastructure.SqlServer.Data;
 using Maintenance.Infrastructure.SqlServer.Entities;
@@ -427,6 +428,35 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
             }
         }
 
+        public async Task<OperationResult<List<UserViewModel>>> GetAllTechnicalStaff()
+        {
+            try
+            {
+                string query = "B1CS_GET_TECHNICAL_STAFF";
+
+                var dataRows = _dataContext.ExecuteStoredProcedureRaw(query, DataContextSql.SqlDbTarget.Default);
+
+                var result = dataRows
+                .Select(d =>
+                {
+                    return new UserViewModel
+                    {
+                        UserCode = Convert.ToString(d["UserCode"]),
+                        UserName = Convert.ToString(d["UserName"]),
+                        Department = Convert.ToString(d["Department"]),
+                        DepartmentDes = Convert.ToString(d["DepartmentDes"]),
+                    };
+                })
+                .ToList();
+
+                return OperationResult<List<UserViewModel>>.Success(message: "Get all technical staff successfully", data: result);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<OperationResult<MaintenanceViewModel>> GetMaintenanceDetail(int id)
         {
             try
@@ -699,8 +729,15 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
 
                     Dscription = model.Dscription,
 
-                    ApproveStatus = model.MtnType == 0 ? 0 : 1,
-                    Status = model.MtnType == 0 ? 2 : 0,
+                    //ApproveStatus = model.MtnType == 0 ? 0 : 1,
+                    ApproveStatus = 1,
+                    //Status = model.MtnType == 0 ? 2 : 0,
+                    Status = 0,
+
+                    AssignUser = model.AssignTo?.UserCode,
+                    AssignUserName = model.AssignTo?.UserName,
+                    AssignUserDepartment = model.AssignTo?.Department,
+                    AssignUserDepartmentDes = model.AssignTo?.DepartmentDes,
 
                     CreatedBy = model.CreatedBy,
                     UpdatedBy = model.CreatedBy,
@@ -864,6 +901,7 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                     if (equipment.CheckLists?.Any() == true)
                     {
                         var checkLists = equipment.CheckLists
+                            .OrderBy(x => x.LineId)
                             .Select(x => new MaintenenceCheckLists
                             {
                                 HeaderId = maintenance.Id,
@@ -1395,6 +1433,12 @@ namespace Maintenance.Infrastructure.SqlServer.Repositories.Maintenance
                 }
 
                 SAPbobsCOM.Documents purchaseRequest = (SAPbobsCOM.Documents)_oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oPurchaseRequest);
+
+                Console.WriteLine($"AccountId: {model.AccountId}");
+                Console.WriteLine($"ASP.NET UserName: {user.UserName}");
+                Console.WriteLine($"SAP CompanyDB: {_oCompany.CompanyDB}");
+                Console.WriteLine($"SAP UserName: {_oCompany.UserName}");
+                Console.WriteLine($"SAP Requester: {purchaseRequest.Requester}");
 
                 var parameters = new[]
                 {

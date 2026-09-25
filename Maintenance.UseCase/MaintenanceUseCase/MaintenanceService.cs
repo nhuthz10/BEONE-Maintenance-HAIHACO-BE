@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Maintenance.Entities.Maintenance;
 using Maintenance.Entities.Responses;
+using Maintenance.Entities.User;
 using Maintenance.Infrastructure.SqlServer.Repositories.Maintenance;
 using Maintenance.UseCase.EquipmentUseCase;
 using System;
@@ -155,6 +156,19 @@ namespace Maintenance.UseCase.MaintenanceUseCase
             try
             {
                 var result = await _maintenanceRepository.SaveCheckList(model);
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<OperationResult<List<UserViewModel>>> GetAllTechnicalStaff()
+        {
+            try
+            {
+                var result = await _maintenanceRepository.GetAllTechnicalStaff();
                 return result;
             }
             catch

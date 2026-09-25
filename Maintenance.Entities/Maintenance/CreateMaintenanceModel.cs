@@ -16,6 +16,7 @@ namespace Maintenance.Entities.Maintenance
         public DateTime? PlannedCompletionDate { get; set; }
         public string? Dscription { get; set; }
         public string CreatedBy { get; set; }
+        public AssignToViewModel AssignTo { get; set; }
         public List<CreateMaintenenceAttachmentModel>? Attachments { get; set; }
     }
 
@@ -23,5 +24,15 @@ namespace Maintenance.Entities.Maintenance
     {
         public int Order { get; set; }
         public IFormFile File { get; set; }
+    }
+
+    public class AssignToViewModel
+    {
+        public string UserCode { get; set; }
+        public string? UserName { get; set; }
+        public string? Email { get; set; }
+        public string? Department { get; set; }
+        public string? DepartmentDes { get; set; }
+        public string? Position { get; set; }
     }
 }

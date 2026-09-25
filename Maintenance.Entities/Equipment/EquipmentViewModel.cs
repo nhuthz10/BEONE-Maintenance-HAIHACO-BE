@@ -44,6 +44,7 @@ namespace Maintenance.Entities.Equipment
 
     public class EquipmentCheckListViewModel
     {
+        public int? LineId { get; set; }
         public string? JobType { get; set; }
         public string? CheckItem { get; set; }
         public string? Situation { get; set; }
